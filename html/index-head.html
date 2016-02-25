@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pavia Systems - Generic App</title>
+    <link rel="stylesheet" type="text/css" href="css/theme.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900,300" rel="stylesheet" type="text/css">
+</head>
+<body role="document" class="login">
+    <div id="wrapper">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-headlight">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="navbar-brand"><i class="hli hli-headlight-logo fa-lg"></i></span>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <!-- Dynamic Menu Contents  -->
+                    <ul id="main-nav" class="nav navbar-nav"></ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fullUserName">John Doe</span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" id="headerLogout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container " role="main">
+            <!-- Main View -->
+            <div id="appContentContainer"></div>
+            <!-- /CONTAINER-CONTENT -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /#wrapper -->
+
+    <script type="text/javascript">
+        // Added to support ie
+        if (typeof(console) === 'undefined') window.console = { log: function() {} };
+    </script>
+    <!-- SCRIPTS -->
+    <!-- Browser Dependencies -->
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/select2.js"></script>
+    <script type="text/javascript" src="js/toastr.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/c3.js"></script>
+    <script type="text/javascript" src="js/marked.js"></script>
+    <script type="text/javascript" src="js/moment.js"></script>
+    <script type="text/javascript" src="js/moment-timezone.js"></script>
+    <script type="text/javascript" src="js/mousetrap.js"></script>
+    <!-- RequireJS Application -->
+    <script type="text/javascript" data-main="scripts/Application" src="js/require.js"></script>
+    <script>
+        require.config(
+            {
+                urlArgs: 'rev=0000',
+                paths:
+                {
+                    async: 'pict/dependencies/async',
+                    underscore: 'pict/dependencies/underscore'
+                }
+            }
+        );
+    </script>
+    <!-- /SCRIPTS -->
+    <!-- TEMPLATES -->

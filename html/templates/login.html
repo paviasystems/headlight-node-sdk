@@ -1,0 +1,89 @@
+<div id="loginModal" class="modal fade modal-vertical-center" data-backdrop="" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="LoginFormMain">
+                <form id="loginForm" role="form" method="POST">
+                    <div class="modal-body clearfix">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input class="form-control" name="loginUserName" id="loginUserName" placeholder="Email Address" tabindex="1"/>
+                                <label for="loginUserName" class="input-group-addon"><i class="fa fa-user"></i></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" tabindex="2"/>
+                                <label for="loginPassword" class="input-group-addon"><i class="fa fa-lock"></i></label>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix hidden">
+                            <span class="pull-right"> <a id="LoginFormPasswordReset" href="" tabindex="5">forgot password?</a></span>
+                        </div>
+                        <div id="loginValidateError" class="alert alert-danger hidden clearfix"><i class="fa fa-exclamation-triangle icon-large"></i> Invalid user name or password.</div>
+                    </div>
+                    <div class="modal-footer">
+                        <span class="pull-left checkbox">
+                            <label for="rememberUser"><input type="checkbox" name="rememberUser" tabindex="3"> Remember Me</label>
+                        </span>
+                        <button type="submit" class="btn btn-primary btn-lg" tabindex="4">Login</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Password Request Form -->
+            <div id="LoginFormPasswordRequest" class="hidden">
+                <form id="loginFormRequestReset" role="form" method="POST">
+                    <div class="modal-body clearfix">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="loginResetUserName" name="loginResetUserName" value="" placeholder="Enter Your Login Email Address">
+                                <label for="loginResetUserName" class="input-group-addon"><i class="fa fa-user"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary pull-right">Send Password Reset Email</button>
+                                <a class="btn btn-text pull-left" id="LoginFormBackToLogin" href="">return to Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Password Reset Form -->
+            <div id="LoginFormDoPasswordReset" class="hidden">
+                <form id="loginFormReset" role="form" method="POST">
+                    <div class="modal-body clearfix">
+                        <input type="hidden" id="LoginResetKey" name="LoginResetKey" value="BADKEY" />
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="LoginResetNewPassword" name="LoginResetNewPassword" value="" autocomplete="off" placeholder="New Password" >
+                                <label class="input-group-addon" for="LoginResetNewPassword"><i class="fa fa-lock"></i></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="LoginResetNewPasswordConfirm" name="LoginResetNewPasswordConfirm" value="" autocomplete="off" placeholder="Confirm New Password">
+                                <label class="input-group-addon" for="LoginResetNewPasswordConfirm"><i class="fa fa-lock"></i></label>
+                            </div>
+                        </div>
+                        <div id="loginResetValidateError" class="alert alert-danger hidden"><i class="fa fa-exclamation-sign icon-large"></i> Your new password must be typed twice, and match.  This includes uppercase letters!</div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-success pull-right">Reset Password</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login-terms text-center"><small>By clicking Login you are agreeing to our <a href="#modalContent/TermsOfService">Terms and Conditions</a>.</small></div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="login-bg"></div>
