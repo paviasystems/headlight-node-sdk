@@ -42,6 +42,9 @@ var HeadlightApp = function()
 				// The server application to use (by default our built-in nodesdk server)
 				ServerScript: __dirname+'/Headlight-NodeSDK-Server.js',
 
+				// The swill root (used for the sourcing of all the assets etc)
+				SwillRoot: __dirname+'/../',
+
 				APIServerPort: 8080,
 				SessionTimeout: 60,
 
@@ -75,7 +78,71 @@ var HeadlightApp = function()
 			return _Orator;
 		};
 
+
+
 		var _Swill = false;
+		var setSwillSource = function(pSourceFolder)
+		{
+			// Change the source folder settings
+			var tmpSettings = _Swill.settings;
+
+			// Source folder redefinition
+			tmpSettings.Build.Source = pSourceFolder;
+			// Instrumentation code (e.g. New Relic)
+			tmpSettings.Instrumentation.Production = tmpSettings.Build.Source+'Pict-ProductionInstrumentation.js';
+			tmpSettings.Instrumentation.Development = tmpSettings.Build.Source+'Pict-DebugInstrumentation.js';
+			// CSS Less compilation
+			tmpSettings.LessCSS.Source = pSourceFolder+'less/theme.less';
+			tmpSettings.LessCSS.SourceFiles = pSourceFolder+'less/**/*.less';
+			// CSS Sass compilation
+			tmpSettings.SassCSS.Source = pSourceFolder+'sass/theme.scss';
+			tmpSettings.SassCSS.SourceFiles = pSourceFolder+'sass/**/*.scss';
+			// Script compilation for the Pict requirejs app
+			tmpSettings.Scripts.SourceFolder = pSourceFolder+'scripts/';
+			tmpSettings.Scripts.Source = [pSourceFolder+'scripts/**/**.*'];
+			tmpSettings.Scripts.LintIgnore = ['!'+pSourceFolder+'scripts/pict/dependencies/*.js'];
+			// Single-script in-browser dependencies
+			tmpSettings.Dependencies.Source = pSourceFolder+'bower_components/';
+			// Any other assets (images; fonts; full libraries; etc.)
+			tmpSettings.Assets.Source = pSourceFolder;
+			// Site agglomeration
+			tmpSettings.Site.Source = pSourceFolder+'html/**/*.*';
+			tmpSettings.Site.Head = pSourceFolder+'html/index-head.html';
+			tmpSettings.Site.Partials = (
+				[
+					pSourceFolder+'html/templates/**/*.html',
+					pSourceFolder+'html/static/**/*.html',
+					pSourceFolder+'html/pict/**/*.html',
+					pSourceFolder+'html/recordsets/**/*.html'
+				]);
+			tmpSettings.Site.Tail = pSourceFolder+'html/index-tail.html';
+			tmpSettings.Site.Scripts = pSourceFolder+'scripts/**/*.js';
+		};
+
+
+		var setSwillDestination = function(pDestinationFolder)
+		{
+			// Change the destination folder settings
+			var tmpSettings = _Swill.settings;
+
+			// Destination folder redefinition
+			tmpSettings.Build.Destination = pDestinationFolder;
+			// CSS Less compilation
+			tmpSettings.LessCSS.Destination = pDestinationFolder+'css/';
+			// CSS Sass compilation
+			tmpSettings.SassCSS.Destination = pDestinationFolder+'css/';
+			// Script compilation for the Pict requirejs app
+			tmpSettings.Scripts.Destination = pDestinationFolder+'scripts/';
+			// Single-script in-browser dependencies
+			tmpSettings.Dependencies.Destination = pDestinationFolder;
+			// Any other assets (images; fonts; full libraries; etc.)
+			tmpSettings.Assets.Destination = pDestinationFolder;
+			// Site agglomeration
+			tmpSettings.Site.Destination = pDestinationFolder;
+		};
+
+
+
 		var swill = function()
 		{
 			if (_Swill) return _Swill;
@@ -87,8 +154,8 @@ var HeadlightApp = function()
 			_Swill.settings.ServerApplication = _Settings.ServerScript;
 
 			// Set the build to go to the static content folder.
-			console.log(_Settings.StaticContentFolder)
-			_Swill.settings.Build.Destination = _Settings.StaticContentFolder;
+			setSwillSource(_Settings.SwillRoot);
+			setSwillDestination(_Settings.StaticContentFolder);
 
 			// JS Dependencies
 			_Swill.addDependencyCopy({ Hash:'require', Output:'js/require.js', Input:'requirejs/require.js'});
