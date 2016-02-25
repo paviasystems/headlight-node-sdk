@@ -1,2 +1,2 @@
 # headlight-node-sdk
-Headlight Node SDK
+Headlight Node App SDK

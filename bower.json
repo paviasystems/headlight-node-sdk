@@ -1,0 +1,29 @@
+{
+  "name": "headlight-node-sdk",
+  "main": "scripts/Application.js",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "*",
+    "c3": "~0.4.10",
+    "font-awesome": "*",
+    "jquery": "*",
+    "lodash": "*",
+    "marked": "~0.3.5",
+    "moment-timezone": "~0.5.0",
+    "mousetrap": "~1.5.3",
+    "requirejs": "~2.1.22",
+    "select2": "~4.0.1",
+    "toastr": "~2.1.2",
+    "underscore": "~1.8.3",
+    "backbone": "~1.2.3",
+    "jquery.cookie": "~1.4.1"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build",
+    "stage"
+  ]
+}
