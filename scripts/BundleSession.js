@@ -260,6 +260,10 @@ define
 				if (Backbone.history.fragment == 'login' || Backbone.history.fragment == 'register') {
 					_Router.navigate("", {trigger: true, replace: true});
 				}
+
+				_Pict.WriteContent('Headlight_App_Form');
+				if (typeof(HeadlightApp) === 'object')
+					HeadlightApp.initialize(_Pict);
 			};
 
 			// Set the user interface to a non-logged-in state after a logout action

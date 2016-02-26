@@ -38,6 +38,7 @@ var HeadlightApp = function()
 				// By default, use the Stage folder in the INCLUDING module.
 				// This expects "mymodule/node_modules/headlight-nodesk/server"
 				StaticContentFolder: __dirname+'/../../../stage/',
+				HeadlightAppFolder: __dirname+'/../../../headlight-app/',
 
 				// The server application to use (by default our built-in nodesdk server)
 				ServerScript: __dirname+'/Headlight-NodeSDK-Server.js',
@@ -142,7 +143,6 @@ var HeadlightApp = function()
 		};
 
 
-
 		var swill = function()
 		{
 			if (_Swill) return _Swill;
@@ -180,6 +180,11 @@ var HeadlightApp = function()
 			// Copy the bootstrap fonts into the web root
 			_Swill.addAssetCopy({Input:'bower_components/bootstrap/dist/fonts/**/*.*', Output:'fonts/'});
 			_Swill.addAssetCopy({Input:'bower_components/font-awesome/fonts/**/*.*', Output:'fonts/'});
+
+			_Swill.settings.Site.Partials.push(_Settings.HeadlightAppFolder+'Headlight-App-Form.html');
+
+			var libPath = require('path');
+			_Swill.addAssetCopy({Input:libPath.relative(_Settings.SwillRoot,_Settings.HeadlightAppFolder)+'**/*.*', Output:''});
 
 			return _Swill;
 		};

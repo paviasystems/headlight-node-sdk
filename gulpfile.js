@@ -8,4 +8,8 @@
 *
 * @description This is the swill build file to test the javascript, css, html and less.  Plus generate / minify the site.
 */
-var _Swill = require(__dirname+'/server/Headlight-NodeSDK.js').new({StaticContentFolder: __dirname+'/stage/'}).swill();
+var _Swill = require(__dirname+'/server/Headlight-NodeSDK.js').new(
+	{
+		StaticContentFolder: __dirname+'/stage/',
+		HeadlightAppFolder: __dirname+'/headlight-app/'
+	}).swill();
