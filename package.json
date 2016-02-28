@@ -1,6 +1,6 @@
 {
   "name": "headlight-node-sdk",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Headlight - App Store Foundation SDK",
   "main": "server/Headlight-NodeSDK.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/paviasystems/headlight-node-sdk#readme",
   "dependencies": {
     "orator-session-remoteauth": "^1.0.1",
-    "swill": "^1.0.4",
+    "swill": "^1.0.6",
     "underscore": "^1.8.3"
   }
 }

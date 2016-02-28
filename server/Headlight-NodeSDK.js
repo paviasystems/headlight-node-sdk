@@ -118,6 +118,12 @@ var HeadlightApp = function()
 				]);
 			tmpSettings.Site.Tail = pSourceFolder+'html/index-tail.html';
 			tmpSettings.Site.Scripts = pSourceFolder+'scripts/**/*.js';
+
+			// Compile from the entrypoint source/Main.js
+			tmpSettings.Compilation.EntryPoint = pSourceFolder+'source/Main.js';
+			// Output to the "headlight-app/Headlight-App-Script.js"
+			tmpSettings.Compilation.Destination = pSourceFolder+'headlight-app/';
+			tmpSettings.Compilation.DestinationScript = 'Headlight-App-Script.js';
 		};
 
 
@@ -140,6 +146,8 @@ var HeadlightApp = function()
 			tmpSettings.Assets.Destination = pDestinationFolder;
 			// Site agglomeration
 			tmpSettings.Site.Destination = pDestinationFolder;
+
+			// Compilation of J
 		};
 
 
@@ -182,7 +190,7 @@ var HeadlightApp = function()
 			_Swill.addAssetCopy({Input:'bower_components/bootstrap/dist/fonts/**/*.*', Output:'fonts/'});
 			_Swill.addAssetCopy({Input:'bower_components/font-awesome/fonts/**/*.*', Output:'fonts/'});
 
-			_Swill.settings.Site.Partials.push(_Settings.HeadlightAppFolder+'Headlight-App-Form.html');
+			_Swill.settings.Site.Partials.push(_Settings.HeadlightAppFolder+'**/*.html');
 
 			var libPath = require('path');
 			_Swill.addAssetCopy({Input:libPath.relative(_Settings.SwillRoot,_Settings.HeadlightAppFolder)+'**/*.*', Output:''});
