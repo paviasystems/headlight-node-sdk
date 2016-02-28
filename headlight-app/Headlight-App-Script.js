@@ -1,22 +1,25 @@
 "use strict";
+// Script here!
+var HeadlightApp = {};
 
-(function()
+
+// Initialize the Headlight App
+HeadlightApp.initialize = function(pPict)
 {
-	var root = this;
-	var appModule = function()
-	{
-	}
-
-	if( typeof exports !== 'undefined' )
-	{
-		if( typeof module !== 'undefined' && module.exports )
+	console.log('Test app initializing!');
+	$('#demoAppForm').submit(
+		function()
 		{
-			exports = module.exports = appModule;
-		}
-		exports.mymodule = appModule;
-	} 
-	else
-	{
-		root.mymodule = appModule
-	}
-}).call(this);
+			console.log('PROCESSING CALCULATOR...');
+
+			var tmpLeft = $('#left_value').val();
+			var tmpRight = $('#right_value').val();
+
+			var tmpResult = tmpLeft+tmpRight;
+
+			// Ridiculous
+			$('#demoResult').html('['+tmpLeft+'] + ['+tmpRight+'] = ['+tmpResult+']');
+
+			return false;
+		});
+};

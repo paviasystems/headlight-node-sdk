@@ -1,0 +1,33 @@
+{
+  "name": "pict",
+  "description": "Pict retold dependency library.",
+  "main": "dist/pict.min.js",
+  "authors": [
+    "steven velozo <steven@velozo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/stevenvelozo/pict",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "coverage",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "_release": "63d83e57d5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "63d83e57d5fd80f7495101766f14adf4dc3a7435"
+  },
+  "_source": "git://github.com/stevenvelozo/pict.git",
+  "_target": "*",
+  "_originalSource": "pict",
+  "_direct": true
+}

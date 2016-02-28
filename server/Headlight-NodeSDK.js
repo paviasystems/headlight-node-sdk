@@ -158,20 +158,21 @@ var HeadlightApp = function()
 			setSwillDestination(_Settings.StaticContentFolder);
 
 			// JS Dependencies
+//			_Swill.addDependencyCopy({ Hash:'jquery', Output: 'js/jquery.js', Input:'jquery/dist/jquery.min.js', InputDebug:'jquery/dist/jquery.js'});
+//			_Swill.addDependencyCopy({ Hash:'backbone', Output: 'js/backbone.js', Input:'backbone/backbone-min.js', InputDebug:'backbone/backbone.js'});
+//			_Swill.addDependencyCopy({ Hash:'underscore', Output: 'js/underscore.js', Input:'underscore/underscore-min.js', InputDebug:'underscore/underscore.js'});
+//			_Swill.addDependencyCopy({ Hash:'mousetrap', Output:'js/mousetrap.js', Input:'mousetrap/mousetrap.min.js', InputDebug:'mousetrap/mousetrap.js'});
+//			_Swill.addDependencyCopy({ Hash:'moment', Output: 'js/moment.js', Input:'moment/min/moment-with-locales.min.js', InputDebug:'moment/moment.js'});
+			_Swill.addDependencyCopy({ Hash:'pict', Output: 'js/pict.js', Input:'pict/dist/pict.min.js', InputDebug:'pict/dist/pict.js'});
 			_Swill.addDependencyCopy({ Hash:'require', Output:'js/require.js', Input:'requirejs/require.js'});
-			_Swill.addDependencyCopy({ Hash:'jquery', Output: 'js/jquery.js', Input:'jquery/dist/jquery.min.js', InputDebug:'jquery/dist/jquery.js'});
 			_Swill.addDependencyCopy({ Hash:'jquery.cookie', Output: 'js/jquery.cookie.js', Input:'jquery.cookie/jquery.cookie.js'});
-			_Swill.addDependencyCopy({ Hash:'backbone', Output: 'js/backbone.js', Input:'backbone/backbone-min.js', InputDebug:'backbone/backbone.js'});
 			_Swill.addDependencyCopy({ Hash:'bootstrap', Output: 'js/bootstrap.js', Input:'bootstrap/dist/js/bootstrap.min.js', InputDebug:'bootstrap/dist/js/bootstrap.js'});
 			_Swill.addDependencyCopy({ Hash:'c3', Output: 'js/c3.js', Input:'c3/c3.min.js', InputDebug:'c3/c3.js'});
 			_Swill.addDependencyCopy({ Hash:'d3', Output: 'js/d3.js', Input:'d3/d3.min.js', InputDebug:'d3/d3.js'});
 			_Swill.addDependencyCopy({ Hash:'marked', Output: 'js/marked.js', Input:'marked/marked.min.js', InputDebug:'marked/lib/marked.js'});
-			_Swill.addDependencyCopy({ Hash:'moment', Output: 'js/moment.js', Input:'moment/min/moment-with-locales.min.js', InputDebug:'moment/moment.js'});
 			_Swill.addDependencyCopy({ Hash:'moment-timezone', Output: 'js/moment-timezone.js', Input:'moment-timezone/builds/moment-timezone-with-data.min.js', InputDebug:'moment-timezone/builds/moment-timezone-with-data.js'});
 			_Swill.addDependencyCopy({ Hash:'select2', Output: 'js/select2.js', Input:'select2/dist/js/select2.full.min.js', InputDebug:'select2/dist/js/select2.full.js'});
 			_Swill.addDependencyCopy({ Hash:'toaster', Output: 'js/toastr.js', Input:'toastr/toastr.min.js', InputDebug:'toastr/toastr.js'});
-			_Swill.addDependencyCopy({ Hash:'underscore', Output: 'js/underscore.js', Input:'underscore/underscore-min.js', InputDebug:'underscore/underscore.js'});
-			_Swill.addDependencyCopy({ Hash:'mousetrap', Output:'js/mousetrap.js', Input:'mousetrap/mousetrap.min.js', InputDebug:'mousetrap/mousetrap.js'});
 
 			// Images and other graphical assets
 			_Swill.addAssetCopy({Input:'assets/images/**/*.*', Output:'images/'});

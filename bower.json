@@ -17,7 +17,8 @@
     "toastr": "~2.1.2",
     "underscore": "~1.8.3",
     "backbone": "~1.2.3",
-    "jquery.cookie": "~1.4.1"
+    "jquery.cookie": "~1.4.1",
+    "pict": "*"
   },
   "ignore": [
     "**/.*",
