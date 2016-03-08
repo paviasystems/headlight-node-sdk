@@ -49,6 +49,9 @@ var HeadlightApp = function()
 				APIServerPort: 8080,
 				SessionTimeout: 60,
 
+				// By default use the in-memory session store
+				SessionStrategy: "InMemory",
+
 				// Use what most Headlight docker instances use for memcache
 				MemcachedURL: "192.168.99.100:11211",
 
