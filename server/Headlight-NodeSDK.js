@@ -118,12 +118,6 @@ var HeadlightApp = function()
 				]);
 			tmpSettings.Site.Tail = pSourceFolder+'html/index-tail.html';
 			tmpSettings.Site.Scripts = pSourceFolder+'scripts/**/*.js';
-
-			// Compile from the entrypoint source/Main.js
-			tmpSettings.Compilation.EntryPoint = pSourceFolder+'source/Main.js';
-			// Output to the "headlight-app/Headlight-App-Script.js"
-			tmpSettings.Compilation.Destination = pSourceFolder+'headlight-app/';
-			tmpSettings.Compilation.DestinationScript = 'Headlight-App-Script.js';
 		};
 
 
@@ -148,6 +142,13 @@ var HeadlightApp = function()
 			tmpSettings.Site.Destination = pDestinationFolder;
 
 			// Compilation of J
+			var libPath = require('path');
+			// Compile from the entrypoint source/Main.js
+			_Swill.settings.Compilation.EntryPoint = pDestinationFolder+'/../source/Main.js';
+			// Output to the "headlight-app/Headlight-App-Script.js"
+			tmpSettings.Compilation.Destination = pDestinationFolder+'/../headlight-app/';
+			tmpSettings.Compilation.DestinationScript = 'Headlight-App-Script.js';
+
 		};
 
 
@@ -185,6 +186,9 @@ var HeadlightApp = function()
 			// Images and other graphical assets
 			_Swill.addAssetCopy({Input:'assets/images/**/*.*', Output:'images/'});
 			_Swill.addAssetCopy({Input:'assets/fonts/**/*.*', Output:'fonts/'});
+			// Assets from the app itself
+			_Swill.addAssetCopy({Input:'../../assets/images/**/*.*', Output:'images/'});
+
 
 			// Copy the bootstrap fonts into the web root
 			_Swill.addAssetCopy({Input:'bower_components/bootstrap/dist/fonts/**/*.*', Output:'fonts/'});
