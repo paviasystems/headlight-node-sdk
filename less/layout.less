@@ -26,7 +26,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    
+
 }
 @media (max-width:767px) {
     .modal-vertical-center {
@@ -55,12 +55,12 @@
     right: 0;
     margin: auto;
     // z-index: -1;
-    opacity: 1; 
+    opacity: 1;
     transiton: all @animation-timing ease-in-out;
     transition-delay: 250ms;
 }
 body {
-    
+
     // Login Modal Open
     &.login {
         #wrapper {
@@ -78,7 +78,7 @@ body {
         }
         .login-bg {
             opacity: 0;
-            transition: all @animation-timing ease-in-out; 
+            transition: all @animation-timing ease-in-out;
         }
         .login-logo {
             display: none;
@@ -117,14 +117,14 @@ body {
     height: 60px;
     padding: 17px 0;
     box-sizing: content-box;
-    
+
     img {
         max-height: 60px;
         max-width: 49%;
         -webkit-user-drag: none;
         -moz-user-drag: none;
         -ms-user-drag: none;
-        
+
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -205,5 +205,42 @@ body {
         background-color: @p-orange;
         color: @p-white;
     }
+}
 
+.pavia_academy_link {
+    padding-top: 12px;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    float: right;
+    background-color: @p-light-gray;
+    margin-top: 0.5rem;
+    border-radius: 25px;
+}
+
+.user-badge {
+    background-color: @p-light-gray;
+    border-radius: 0.4rem;
+    height: 6.0rem;
+    padding: 1.0rem 1.5rem;
+    margin-bottom: 1.0rem;
+
+    .login-text {
+        color: @p-middle-gray;
+    }
+
+    .login-name {
+        font-weight: bold;
+    }
+
+    .login-title {
+        color: @p-orange;
+        display: block;
+        font-weight: bold;
+    }
+
+    div
+    {
+        text-align: right;
+    }
 }
