@@ -4,6 +4,7 @@
 * @author <steven.velozo@paviasystems.com>
 */
 var libUnderscore = require('underscore');
+var libRestify = require('restify');
 
 /**
 * Main Headlight Node SDK APP
@@ -61,6 +62,26 @@ var HeadlightApp = function()
 		// Map in the passed-in settings and default settings
 		var _Settings = libUnderscore.extend({}, _SettingsDefaults, (typeof(pSettings) === 'object') ? pSettings : {});
 
+		var getAppPage = function(pRequest, pResponse, fNext)
+		{
+			var tmpFile = 'login.html';
+
+			if (pRequest.UserSession.LoggedIn)
+				tmpFile = 'index.html';
+
+			_Orator.fable.log.fatal('Sending '+tmpFile);
+
+			var tmpServe = libRestify.serveStatic
+			(
+				{
+					directory: _SettingsDefaults.StaticContentFolder,
+					default: tmpFile
+				}
+			);
+			tmpServe(pRequest, pResponse, fNext);
+		};
+
+
 		var _Orator = false;
 		var orator = function()
 		{
@@ -73,6 +94,10 @@ var HeadlightApp = function()
 			// Map in the proxy Authentication
 			var _OratorSessionHttpAuth = require('orator-session-remoteauth').new(_Orator);
 			_OratorSessionHttpAuth.connectRoutes(_Orator.webServer);
+
+			// Add branching on index.html to load login.html if we have no session
+			_Orator.webServer.get('index.html', getAppPage);
+			_Orator.webServer.get('/', getAppPage);
 
 			// Map the staged web site to a static server on all other root requests
 			_Orator.addStaticRoute(_SettingsDefaults.StaticContentFolder);
@@ -191,6 +216,12 @@ var HeadlightApp = function()
 			_Swill.addAssetCopy({Input:'assets/fonts/**/*.*', Output:'fonts/'});
 			// Assets from the app itself
 			_Swill.addAssetCopy({Input:'../../assets/images/**/*.*', Output:'images/'});
+
+			// The login page
+			_Swill.addAssetCopy({Input:'html/login.html', Output:''});
+
+			// The Headlight App specific javascript files
+			_Swill.addAssetCopy({Input:'js/*.js', Output:'js/'});
 
 
 			// Copy the bootstrap fonts into the web root

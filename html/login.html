@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pavia Systems - Generic App</title>
+    <link rel="stylesheet" type="text/css" href="css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="headlight-app/Headlight-App-Style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900,300" rel="stylesheet" type="text/css">
+</head>
+<body role="document" class="login">
+    <div id="loginModal" class="modal fade modal-vertical-center" data-backdrop="" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="LoginFormMain">
+                    <form id="loginForm" role="form" method="POST">
+                        <div class="modal-body clearfix">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input class="form-control" name="loginUserName" id="loginUserName" placeholder="Email Address" tabindex="1"/>
+                                    <label for="loginUserName" class="input-group-addon"><i class="fa fa-user"></i></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" tabindex="2"/>
+                                    <label for="loginPassword" class="input-group-addon"><i class="fa fa-lock"></i></label>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix hidden">
+                                <span class="pull-right"> <a id="LoginFormPasswordReset" href="" tabindex="5">forgot password?</a></span>
+                            </div>
+                            <div id="loginValidateError" class="alert alert-danger hidden clearfix"><i class="fa fa-exclamation-triangle icon-large"></i> Invalid user name or password.</div>
+                        </div>
+                        <div class="modal-footer">
+                            <span class="pull-left checkbox">
+                                <label for="rememberUser"><input type="checkbox" name="rememberUser" tabindex="3"> Remember Me</label>
+                            </span>
+                            <button type="submit" class="btn btn-primary btn-lg" tabindex="4">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="login-terms text-center"><small>By clicking Login you are agreeing to our <a href="#modalContent/TermsOfService">Terms and Conditions</a>.</small></div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="login-bg"></div>
+
+    <script type="text/javascript">
+        // Added to support older ie
+        if (typeof(console) === 'undefined') window.console = { log: function() {} };
+    </script>
+    <script type="text/javascript" src="js/pict.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="headlight-app/Headlight-App-Style.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900,300" rel="stylesheet" type="text/css">
 </head>
-<body role="document" class="login">
+<body role="document">
     <div id="wrapper">
         <div class="container app-container" role="main">
             <!-- Header View -->
@@ -43,17 +43,8 @@
         if (typeof(console) === 'undefined') window.console = { log: function() {} };
     </script>
     <!-- SCRIPTS -->
-    <!-- Browser Dependencies -->
-    <!-- the pict.js framework loads these as require() AMD modules now and minifies them into itself.
-    <script type="text/javascript" src="js/underscore.js"></script>
-    <script type="text/javascript" src="js/backbone.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
-    <script type="text/javascript" src="js/mousetrap.js"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-     -->
-
+    <!-- Browser Dependencies autoloaded by pict: underscore, backbone, moment, mousetrap and jquery -->
     <script type="text/javascript" src="js/pict.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/select2.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>
@@ -61,21 +52,11 @@
     <script type="text/javascript" src="js/c3.js"></script>
     <script type="text/javascript" src="js/marked.js"></script>
 
-    <!-- Headlight App Script code -->
+    <!-- Headlight App Framework -->
+    <script type="text/javascript" src="js/headlight-app.js"></script>
+
+    <!-- Headlight App Script-specific Code -->
     <script type="text/javascript" src="headlight-app/Headlight-App-Script.js"></script>
-    <!-- RequireJS Application -->
-    <script type="text/javascript" data-main="scripts/Application" src="js/require.js"></script>
-    <script>
-        require.config(
-            {
-                urlArgs: 'rev=0000',
-                paths:
-                {
-                    async: 'pict/dependencies/async',
-                    underscore: 'pict/dependencies/underscore'
-                }
-            }
-        );
-    </script>
     <!-- /SCRIPTS -->
+
     <!-- TEMPLATES -->
