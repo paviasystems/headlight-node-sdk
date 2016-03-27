@@ -67,6 +67,9 @@ headlight.checkSessionStatus = function()
 				$('#appNavigationContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Navigation').text()));
 				$('#appContentContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Form').text()));
 				$('#appFooterContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Footer').text()));
+
+				// Now load the module
+				headlight.loadModule();
 			}
 			else
 			{

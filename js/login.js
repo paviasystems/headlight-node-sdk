@@ -14,6 +14,10 @@ if (window.localStorage && window.localStorage.getItem('_pict_user') !== null)
 	$('#loginUserName').val(window.localStorage.getItem('_pict_user'));
 	$('#loginPassword').focus();
 }
+else
+{
+	$('#loginUserName').focus();
+}
 
 $('#loginForm').submit
 (
