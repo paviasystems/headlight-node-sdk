@@ -73,6 +73,18 @@ $('#loginForm').submit
 					}
 
 					// Now reload the page, unless it was login.html, then load index.html
+					if (window.location.pathname === 'login.html')
+					{
+						var tmpRootURI = window.location.protocol+'//'+window.location.host;
+						if (window.location.port !== 80)
+							tmpRootURI += ':'+window.location.port;
+						tmpRootURI += '/';
+						window.location.replace(tmpRootURI);
+					}
+					else
+					{
+						location.reload();
+					}
 				}
 				else
 				{

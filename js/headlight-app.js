@@ -70,8 +70,8 @@ headlight.checkSessionStatus = function()
 			}
 			else
 			{
-				// Clear the session variable, then reload to get the login page.
-				pict.session = false;
+				// Reload to get the login page.
+				location.reload();
 			}
 		}
 	)
