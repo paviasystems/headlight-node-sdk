@@ -95,6 +95,8 @@ var HeadlightApp = function()
 			var _OratorSessionHttpAuth = require('orator-session-remoteauth').new(_Orator);
 			_OratorSessionHttpAuth.connectRoutes(_Orator.webServer);
 
+			_Orator.addProxyRoute('1.0/', _Orator.settings.AuthenticationServerURL);
+
 			// Add branching on index.html to load login.html if we have no session
 			_Orator.webServer.get('index.html', getAppPage);
 			_Orator.webServer.get('/', getAppPage);
