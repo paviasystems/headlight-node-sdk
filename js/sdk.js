@@ -67,6 +67,9 @@ HeadlightApp.initialize = function(){
 
 HeadlightApp.start = function(appData){
     
+    new NavigationView();
+    new HeaderView();
+    
     new DefaultRouter();
     new ProjectsRouter();
     new RecordsRouter({ recordHash: appData.AppRecordHash });
