@@ -20,7 +20,8 @@
     "jquery.cookie": "~1.4.1",
     "pict": "*",
     "google-maps": "^3.2.1",
-    "jquery-locationpicker-plugin": "^0.1.12"
+    "jquery-locationpicker-plugin": "^0.1.12",
+    "backbone.validation": "backbone-validation#^0.11.5"
   },
   "ignore": [
     "**/.*",

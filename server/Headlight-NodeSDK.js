@@ -206,6 +206,7 @@ var HeadlightApp = function()
 			_Swill.addDependencyCopy({ Hash:'require', Output:'js/require.js', Input:'requirejs/require.js'});
 			_Swill.addDependencyCopy({ Hash:'jquery.cookie', Output: 'js/jquery.cookie.js', Input:'jquery.cookie/jquery.cookie.js'});
 			_Swill.addDependencyCopy({ Hash:'jquery-locationpicker', Output: 'js/locationpicker.jquery.js', Input:'jquery-locationpicker-plugin/dist/locationpicker.jquery.min.js', InputDebug:'jquery-locationpicker-plugin/dist/locationpicker.jquery.js'});
+			_Swill.addDependencyCopy({ Hash:'backbone-validation', Output: 'js/backbone-validation.js', Input:'backbone.validation/dist/backbone-validation-min.js', InputDebug:'backbone.validation/dist/backbone-validation.js'});
 			_Swill.addDependencyCopy({ Hash:'google-maps', Output: 'js/google-maps.jquery.js', Input:'google-maps/lib/Google.min.js', InputDebug:'google-maps/lib/Google.js'});
 			_Swill.addDependencyCopy({ Hash:'bootstrap', Output: 'js/bootstrap.js', Input:'bootstrap/dist/js/bootstrap.min.js', InputDebug:'bootstrap/dist/js/bootstrap.js'});
 			_Swill.addDependencyCopy({ Hash:'c3', Output: 'js/c3.js', Input:'c3/c3.min.js', InputDebug:'c3/c3.js'});
