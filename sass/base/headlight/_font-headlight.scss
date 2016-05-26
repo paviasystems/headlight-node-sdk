@@ -1,0 +1,198 @@
+@font-face {
+    font-family: 'HeadLight';
+    src:    url('../headlight-app/fonts/headlight/HeadLight.eot?649vi1');
+    src:    url('../headlight-app/fonts/headlight/HeadLight.eot?649vi1#iefix') format('embedded-opentype'),
+        url('../headlight-app/fonts/headlight/HeadLight.ttf?649vi1') format('truetype'),
+        url('../headlight-app/fonts/headlight/HeadLight.woff?649vi1') format('woff'),
+        url('../headlight-app/fonts/headlight/HeadLight.svg?649vi1#HeadLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.hli {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'HeadLight' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.hli-weather-cloudy:before {
+    content: "\e915";
+}
+.hli-weather-tornado:before {
+    content: "\e916";
+}
+.hli-weather-windy:before {
+    content: "\e917";
+}
+.hli-weather-fog:before {
+    content: "\e918";
+}
+.hli-weather-hurricane:before {
+    content: "\e919";
+}
+.hli-weather-ice:before {
+    content: "\e91a";
+}
+.hli-weather-partly-cloudy:before {
+    content: "\e91b";
+}
+.hli-weather-rain-snow:before {
+    content: "\e91c";
+}
+.hli-weather-rain:before {
+    content: "\e91d";
+}
+.hli-weather-snow:before {
+    content: "\e91e";
+}
+.hli-weather-storms:before {
+    content: "\e91f";
+}
+.hli-weather-sunny:before {
+    content: "\e920";
+}
+.hli-weather-unknown:before {
+    content: "\e921";
+}
+.hli-fnr-solid:before {
+    content: "\e900";
+}
+.hli-geolocation-solid:before {
+    content: "\e901";
+}
+.hli-idr-solid:before {
+    content: "\e902";
+}
+.hli-signature-solid:before {
+    content: "\e903";
+}
+.hli-text-solid:before {
+    content: "\e904";
+}
+.hli-traffic-solid:before {
+    content: "\e905";
+}
+.hli-audio-solid:before {
+    content: "\e906";
+}
+.hli-calculate-solid:before {
+    content: "\e907";
+}
+.hli-density-solid:before {
+    content: "\e908";
+}
+.hli-envelope-solid:before {
+    content: "\e909";
+}
+.hli-equipment-solid:before {
+    content: "\e90a";
+}
+.hli-priority-flag-solid:before {
+    content: "\e90b";
+}
+.hli-qr-create-solid:before {
+    content: "\e90c";
+}
+.hli-qr-scan-solid:before {
+    content: "\e90d";
+}
+.hli-personnel-solid:before {
+    content: "\e90e";
+}
+.hli-photo-solid:before {
+    content: "\e90f";
+}
+.hli-start-stop-solid:before {
+    content: "\e910";
+}
+.hli-temperature-solid:before {
+    content: "\e911";
+}
+.hli-timestamp-solid:before {
+    content: "\e912";
+}
+.hli-video-solid:before {
+    content: "\e913";
+}
+.hli-weather-solid:before {
+    content: "\e914";
+}
+.hli-headlight-logo:before {
+    content: "\e606";
+}
+.hli-traffic:before {
+    content: "\e616";
+}
+.hli-audio:before {
+    content: "\e600";
+}
+.hli-density:before {
+    content: "\e601";
+}
+.hli-envelope:before {
+    content: "\e602";
+}
+.hli-equipment:before {
+    content: "\e603";
+}
+.hli-fnr:before {
+    content: "\e604";
+}
+.hli-geolocation:before {
+    content: "\e605";
+}
+.hli-idr:before {
+    content: "\e607";
+}
+.hli-personnel:before {
+    content: "\e609";
+}
+.hli-photo:before {
+    content: "\e60a";
+}
+.hli-priority-flag:before {
+    content: "\e60b";
+}
+.hli-qr-code:before {
+    content: "\e60c";
+}
+.hli-qr-create:before {
+    content: "\e60d";
+}
+.hli-qr-scan:before {
+    content: "\e60e";
+}
+.hli-signature:before {
+    content: "\e60f";
+}
+.hli-calculate:before {
+    content: "\e608";
+}
+.hli-start-stop:before {
+    content: "\e610";
+}
+.hli-temperature:before {
+    content: "\e611";
+}
+.hli-text:before {
+    content: "\e612";
+}
+.hli-timestamp:before {
+    content: "\e613";
+}
+.hli-video:before {
+    content: "\e614";
+}
+.hli-weather:before {
+    content: "\e615";
+}
+

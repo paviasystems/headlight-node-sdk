@@ -1,0 +1,20 @@
+form {
+    input, textarea, select {
+        &.invalid {
+            border: 1px solid $red;
+        }
+    }
+}
+
+.validation-summary {
+    .summary-list {
+        .alert {
+            i {
+                font-size: 1.5em;
+                margin-right: 10px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+}

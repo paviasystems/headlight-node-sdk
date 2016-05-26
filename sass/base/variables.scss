@@ -1,0 +1,19 @@
+
+/* colors */
+$black:     #333333;
+$blue:      #316096;
+$yellow:    #D08611;
+$red:       #a94442;
+
+$light-gray: #efefef;
+
+$base-font-color:     $black;
+$base-link-color:     $blue;
+$base-accent-color:   $yellow;
+
+/* fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+$sans-serif: 'Open Sans', Roboto, sans-serif;
+
+$base-font-family: $sans-serif;

@@ -1,0 +1,71 @@
+<script type="text/template" id="project-edit-tmpl">
+    <div class="edit-project">
+        <h1><%= Name %></h1>
+        <div class="validation-summary"></div>
+        
+        <div class="box">
+        
+            <div class="row">
+                <div class="col-md-6">
+                
+                    <form class="form-horizontal">
+                        <fieldset>
+                
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="Name">Name</label>  
+                                <div class="col-md-10">
+                                    <input id="Name" name="Name" type="text" placeholder="Project Name" class="form-control input-md project-name" value="<%= Name %>">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="textarea">Description</label>
+                                <div class="col-md-10">                     
+                                    <textarea class="form-control" id="textarea" name="textarea" class="project-description"><%= Description %></textarea>
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="location">Location</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="location" name="" placeholder="Location" class="form-control input-md project-location">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="Latitude">Latitude</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="Latitude" placeholder="Latitude" class="form-control input-md project-latitude" value="<%= Latitude %>">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="Longitude">Longitude</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="Longitude" placeholder="Latitude" class="form-control input-md project-longitude" value="<%= Longitude %>">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="save-project"></label>
+                                <div class="col-md-10">
+                                    <button id="save-project" name="save-project" type="button" class="btn btn-primary save-project">Save</button>
+                                    <button type="button" class="btn btn-default cancel-project">Cancel</button>
+                                </div>
+                            </div>
+                        
+                        </fieldset>
+                    </form>
+        
+                </div>
+                <div class="col-md-6">
+                
+                    <div class="project-map"></div>
+                
+                </div>
+            </div>
+        
+        </div>
+        
+    </div>
+</script>

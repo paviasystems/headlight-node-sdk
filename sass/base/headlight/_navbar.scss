@@ -1,0 +1,80 @@
+.navbar-default {
+    
+    $nav-bg-color: $color-dark-blue;
+    $nav-bg-color-active: #0087db;
+    $nav-border-color: #003454;
+    $nav-font-color: $color-off-white;
+    $nav-font-color-active: $brand-secondary;
+    
+    
+    border-color: $nav-border-color;
+
+    &.navbar-fixed-top {
+        background-color: $nav-bg-color;
+    }
+    
+    .navbar-brand {
+        color: $nav-font-color;
+        
+        &:hover, &:focus {
+            color: $nav-font-color;
+        }
+    }
+    
+    .navbar-nav {
+        .nav-item {
+            
+            a, a:focus {
+                color: $nav-font-color;
+                
+                &:active, &:hover {
+                    color: $nav-font-color-active;
+                }
+            }
+
+            &.active {
+                a, a:hover, a:active {
+                    color: $nav-font-color;
+                    background-color: $nav-bg-color-active;
+                }
+            }
+            
+        }
+    }
+    
+    .pavia_academy_link {
+        background-color: $color-invisible;
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 15px;
+        float: right;
+        
+        a {
+            color: $nav-font-color;
+        }
+    }
+    
+    .user-badge {
+        background-color: $color-invisible;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        float:right;
+        cursor: pointer;
+        
+        .open {
+            background-color: $nav-bg-color-active;
+        }
+        
+        .login-text {
+            padding: 15px;
+            color: $nav-font-color;
+    
+            &:hover {
+                color: $nav-font-color-active;
+            }
+            
+        }
+    }
+}

@@ -1,0 +1,21 @@
+
+body {
+    font-family: $base-font-family;
+    background-color: $body-bg;
+}
+
+a {
+    color: $base-link-color;
+}
+
+#appContentContainer {
+    margin-top: 50px;
+}
+
+.box {
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #DEDEDE;
+    border-radius: 4px;
+    box-shadow: #D8D8D8 0px 2px;
+}
