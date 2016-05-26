@@ -142,6 +142,7 @@ var HeadlightApp = function()
 			tmpSettings.Site.Partials = (
 				[
 					pSourceFolder+'html/templates/**/*.html',
+					pSourceFolder+'headlight-app-backbone/partials/**/*.html',
 					pSourceFolder+'html/static/**/*.html',
 					pSourceFolder+'html/pict/**/*.html',
 					pSourceFolder+'html/recordsets/**/*.html'
@@ -159,7 +160,7 @@ var HeadlightApp = function()
 			// Destination folder redefinition
 			tmpSettings.Build.Destination = pDestinationFolder;
 			// CSS Less compilation
-			tmpSettings.LessCSS.Destination = pDestinationFolder+'css/';
+			tmpSettings.LessCSS.Destination = pDestinationFolder+'login/css/';
 			// CSS Sass compilation
 			tmpSettings.SassCSS.Destination = pDestinationFolder+'css/';
 			// Script compilation for the Pict requirejs app
@@ -189,6 +190,7 @@ var HeadlightApp = function()
 			_Swill = require('swill');
 
 			_Swill.settings.CSS.Less = true;
+			_Swill.settings.CSS.Sass = true;
 
 			_Swill.settings.ServerApplication = _Settings.ServerScript;
 
@@ -207,7 +209,8 @@ var HeadlightApp = function()
 			_Swill.addDependencyCopy({ Hash:'jquery.cookie', Output: 'js/jquery.cookie.js', Input:'jquery.cookie/jquery.cookie.js'});
 			_Swill.addDependencyCopy({ Hash:'jquery-locationpicker', Output: 'js/locationpicker.jquery.js', Input:'jquery-locationpicker-plugin/dist/locationpicker.jquery.min.js', InputDebug:'jquery-locationpicker-plugin/dist/locationpicker.jquery.js'});
 			_Swill.addDependencyCopy({ Hash:'backbone-validation', Output: 'js/backbone-validation.js', Input:'backbone.validation/dist/backbone-validation-min.js', InputDebug:'backbone.validation/dist/backbone-validation.js'});
-			_Swill.addDependencyCopy({ Hash:'google-maps', Output: 'js/google-maps.jquery.js', Input:'google-maps/lib/Google.min.js', InputDebug:'google-maps/lib/Google.js'});
+//			_Swill.addDependencyCopy({ Hash:'google-maps', Output: 'js/google-maps.js', Input:'google-maps/lib/Google.min.js', InputDebug:'google-maps/lib/Google.js'});
+			_Swill.addDependencyCopy({ Hash:'google-places', Output: 'js/google-places.js', Input:'google-places/google-places.js', InputDebug:'google-places/google-places.js'});
 			_Swill.addDependencyCopy({ Hash:'bootstrap', Output: 'js/bootstrap.js', Input:'bootstrap/dist/js/bootstrap.min.js', InputDebug:'bootstrap/dist/js/bootstrap.js'});
 			_Swill.addDependencyCopy({ Hash:'c3', Output: 'js/c3.js', Input:'c3/c3.min.js', InputDebug:'c3/c3.js'});
 			_Swill.addDependencyCopy({ Hash:'d3', Output: 'js/d3.js', Input:'d3/d3.min.js', InputDebug:'d3/d3.js'});
@@ -237,6 +240,62 @@ var HeadlightApp = function()
 
 			var libPath = require('path');
 			_Swill.addAssetCopy({Input:libPath.relative(_Settings.SwillRoot,_Settings.HeadlightAppFolder)+'**/*.*', Output:''});
+			
+			_Swill.addAssetCopy({ Input: 'assets/fonts/**/*.*', Output: 'fonts/'});
+
+
+			var libBrowserify = require('browserify');
+			var libVinylSourceStream = require('vinyl-source-stream');
+			var libVinylBuffer = require('vinyl-buffer');
+			
+			var libUglify = require('gulp-uglify');
+			var libSourcemaps = require('gulp-sourcemaps');
+			var libGulpUtil = require('gulp-util');
+			
+			var gulp = _Swill.gulp;
+			
+			/********************************************************
+			 * TASK: Build the module for the browser
+			 *   This gulp task is taken from the gulp recipe repository:
+			 *   https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md
+			 */
+			gulp.task('compile-app-script-debug',
+				function ()
+				{
+					// set up the custom browserify instance for this task
+					var tmpBrowserify = libBrowserify(
+					{
+						entries: _Swill.settings.Build.Source+'../../headlight-app/scripts/Headlight-App.js'
+					});
+			
+					return tmpBrowserify.bundle()
+						.pipe(libVinylSourceStream('Headlight-App.js'))
+						.pipe(libVinylBuffer())
+								.on('error', libGulpUtil.log)
+						.pipe(_Swill.gulp.dest(_Swill.settings.Site.Destination+'headlight-app/'));
+				}
+			);
+			
+			// ### TASK: Build and stage the full application
+			gulp.task('sdk-scripts-concat', function(){ 
+				
+				var scripts = [
+				    _Swill.settings.Build.Source+'js/sdk.js',
+				    _Swill.settings.Build.Source+'headlight-app-backbone/models/**/*.js',
+				    _Swill.settings.Build.Source+'headlight-app-backbone/views/**/*.js',
+				    _Swill.settings.Build.Source+'headlight-app-backbone/routers/**/*.js'
+				];
+	
+			    return gulp.src(scripts)
+						        .pipe(require('gulp-concat')('sdk-scripts.js'))
+						        .pipe(gulp.dest(_Swill.settings.Site.Destination+'js/'));
+			});
+		
+			// ### TASK: Build and stage the full application
+			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'compile-app-script-debug']);
+		
+			// ### TASK: Build and stage the full application for debug
+			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'compile-app-script-debug']);
 
 			return _Swill;
 		};
