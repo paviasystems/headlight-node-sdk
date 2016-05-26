@@ -205,6 +205,7 @@ var HeadlightApp = function()
 			_Swill.addDependencyCopy({ Hash:'pict', Output: 'js/pict.js', Input:'pict/dist/pict.min.js', InputDebug:'pict/dist/pict.js'});
 			_Swill.addDependencyCopy({ Hash:'require', Output:'js/require.js', Input:'requirejs/require.js'});
 			_Swill.addDependencyCopy({ Hash:'jquery.cookie', Output: 'js/jquery.cookie.js', Input:'jquery.cookie/jquery.cookie.js'});
+			_Swill.addDependencyCopy({ Hash:'jquery-locationpicker', Output: 'js/locationpicker.jquery.js', Input:'jquery-locationpicker-plugin/dist/locationpicker.jquery.js', InputDebug:'jquery-locationpicker-plugin/dist/locationpicker.jquery.min.js'});
 			_Swill.addDependencyCopy({ Hash:'bootstrap', Output: 'js/bootstrap.js', Input:'bootstrap/dist/js/bootstrap.min.js', InputDebug:'bootstrap/dist/js/bootstrap.js'});
 			_Swill.addDependencyCopy({ Hash:'c3', Output: 'js/c3.js', Input:'c3/c3.min.js', InputDebug:'c3/c3.js'});
 			_Swill.addDependencyCopy({ Hash:'d3', Output: 'js/d3.js', Input:'d3/d3.min.js', InputDebug:'d3/d3.js'});
