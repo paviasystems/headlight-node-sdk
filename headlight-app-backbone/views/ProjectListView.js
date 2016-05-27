@@ -1,4 +1,4 @@
-// Pavia Systems Drainage app
+// Pavia Systems Headlight App SDK
 // Project List views
 // @author Ryan Vanderpol <me@ryanvanderpol.com>
 
@@ -43,7 +43,7 @@ var ProjectListItemView = Backbone.View.extend({
 
 // View class for rendering the list of all projects
 var ProjectListView = Backbone.View.extend({
-    el: '#drainage-app',
+    el: '#headlight-app',
 
     initialize: function() {
         this.template = _.template($('#project-list-tmpl').html());

@@ -1,4 +1,4 @@
-// Pavia Systems Drainage app
+// Pavia Systems Headlight App SDK
 // Validation summary view
 // @author Ryan Vanderpol <me@ryanvanderpol.com>
 

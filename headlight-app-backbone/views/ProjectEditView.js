@@ -1,4 +1,4 @@
-// Pavia Systems Drainage app
+// Pavia Systems Headlight App SDK
 // Project editing views
 // @author Ryan Vanderpol <me@ryanvanderpol.com>
 
@@ -9,7 +9,7 @@
 "use strict";
 
 var ProjectEditView = Backbone.View.extend({
-    el: '#drainage-app',
+    el: '#headlight-app',
 
     initialize: function() {
         this.template = _.template($('#project-edit-tmpl').html());
