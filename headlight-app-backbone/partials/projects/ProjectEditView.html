@@ -1,6 +1,6 @@
 <script type="text/template" id="project-edit-tmpl">
     <div class="edit-project">
-        <h1><%= Name %></h1>
+        <h1><%= project.Name %></h1>
         <div class="validation-summary"></div>
         
         <div class="box">
@@ -14,14 +14,14 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="Name">Name</label>  
                                 <div class="col-md-10">
-                                    <input id="Name" name="Name" type="text" placeholder="Project Name" class="form-control input-md project-name" value="<%= Name %>">
+                                    <input id="Name" name="Name" type="text" placeholder="Project Name" class="form-control input-md project-name" value="<%= project.Name %>">
                                 </div>
                             </div>
                 
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="textarea">Description</label>
                                 <div class="col-md-10">                     
-                                    <textarea class="form-control" id="textarea" name="textarea" class="project-description"><%= Description %></textarea>
+                                    <textarea class="form-control" id="textarea" name="textarea" class="project-description"><%= project.Description %></textarea>
                                 </div>
                             </div>
                 
@@ -35,14 +35,14 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="Latitude">Latitude</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="Latitude" placeholder="Latitude" class="form-control input-md project-latitude" value="<%= Latitude %>">
+                                    <input type="text" name="Latitude" placeholder="Latitude" class="form-control input-md project-latitude" value="<%= project.Latitude %>">
                                 </div>
                             </div>
                 
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="Longitude">Longitude</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="Longitude" placeholder="Latitude" class="form-control input-md project-longitude" value="<%= Longitude %>">
+                                    <input type="text" name="Longitude" placeholder="Latitude" class="form-control input-md project-longitude" value="<%= project.Longitude %>">
                                 </div>
                             </div>
                             

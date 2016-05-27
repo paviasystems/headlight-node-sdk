@@ -1,12 +1,13 @@
 /* global pict */
 /* global $ */
+/* global _ */
 /* global Backbone */
 
 pict.features = pict.features || {};
 
 var HeadlightApp = pict.features.HeadlightApp = (function(){
     
-    var headlightAppData, session;
+    var headlightAppData, session, currentProject;
     
     this.checkSessionStatus = function()
     {
@@ -75,8 +76,26 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         new ProjectsRouter({ HeadlightAppData: appData });
         new RecordsRouter({ HeadlightAppData: appData });
         
+        Backbone.history.on('route', routeChanged);
         Backbone.history.start();
-        
+    };
+    
+    var routeChanged = function(router, routeName, parameters){
+        console.log('routeChanged');
+        // Can't figure out a better way to do this...
+        var frags = Backbone.history.fragment.toLowerCase().split('/');
+        var index;
+        if((index = frags.indexOf('projects')) >= 0 && frags.length > index + 1){
+            var projectId = parseInt(frags[index+1]);
+            if(!currentProject || (currentProject && currentProject.get('IDProject') != projectId)) {
+                currentProject = new ProjectModel({ IDProject: projectId });
+                currentProject.fetch();
+            }
+        }
+        else {
+            currentProject = null;
+        }
+
     };
     
     var bootstrap = function(){
@@ -98,21 +117,49 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
             return Backbone.$.ajax.apply(Backbone.$, arguments);
         };
         
-        var typeToClass = {
-            'boolean': Boolean,
-            'number': Number,
-            'string': String,
-            'array': Array,
-            'regexp': RegExp,
-            'function': Function
-        };
         
-        pict.libs.underscore.extend(Backbone.Validation.validators, {
+        var typeToClass = { 'boolean': Boolean, 'number': Number, 'string': String, 'array': Array, 'regexp': RegExp, 'function': Function };
+        
+        _.extend(Backbone.Validation, {
+            classToType: function(c){
+                return _.find(_.keys(typeToClass), function(key) { return (typeToClass[key] == c); });
+            },
+            typeToClass: function(t){
+                return typeToClass[t];
+            }
+        });
+        
+        _.extend(Backbone.Validation.validators, {
             type: function(value, attr, customValue, model){
                 if(typeToClass[typeof(value)] !== customValue) return 'Not the correct type.';
             },
             enum: function(value, attr, customValue, model){
                 if(!customValue || customValue.indexOf(value) < 0) return 'Not a valid value';
+            }
+        });
+        
+        var _t = _.template;
+        _.extend(_, { 
+            template: function(templateString, settings){
+                var template = _t(templateString, settings);
+                var templateWithHelpers = function(data) {
+                    data = data || {};
+                    _.extend(data, {
+                        url: function(path){
+                            return '/#headlightapp/' + headlightAppData.AppHash + (path.indexOf('/') == 0 ? path : '/' + path);
+                        },
+                        capitalize: function(str){
+                            return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                        },
+                        humanize: function(text){
+                            return text.replace(/([A-Z])/g, ' $1') // space before each capital letter
+                                        .replace(/[_-]/g, ' ') // underscores to spaces
+                                        .replace(/^./, function(str){ return str.toUpperCase(); })
+                        }
+                    });
+                    return template(data);
+                };
+                return templateWithHelpers;
             }
         });
     };
@@ -172,12 +219,60 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     	}
     };
     
+    var AppData = {
+        
+        load: function(id, success, error){
+            
+            var r = new AppDataModel({ IDAppData: id });
+            r.fetch({ success: function(model, response){
+                if(typeof(success) === 'function'){
+                    var record = { 
+                        id: response.IDAppData,
+                        model: response.Datum
+                    };
+                    success(record);
+                }
+            }, error: function(){
+                if(typeof(error) === 'function') error();
+            }});
+            
+        },
+        
+        save: function(record, success, error) {
+            var r = new AppDataModel({ 
+                IDAppData: record.id || 0, 
+                IDProject: currentProject.get('IDProject'),
+                Type: headlightAppData.AppRecordHash,
+                Title: record.model.Title || (headlightAppData.AppRecordName + ' ' + (record.id || '')),
+                Datum: record.model
+            });
+            r.save(null, { success: function(model, response){
+                if(typeof(success) === 'function'){
+                    var record = { 
+                        id: response.IDAppData,
+                        model: response.Datum
+                    };
+                    success(record);
+                }
+            }, error: function(){
+                if(typeof(error) === 'function') error();
+            }});
+        }
+    };
+    
+    
 
     return {
-        checkSessionStatus: this.checkSessionStatus,
         initialize: this.initialize,
         start: this.start,
+
+        checkSessionStatus: this.checkSessionStatus,
+
+        // module init
         initializeModule: this.initializeModule,
-        loadModule: this.loadModule
+        loadModule: this.loadModule,
+        
+        // data proxies
+        AppData: AppData
     };
 })();

@@ -6,7 +6,7 @@
                 <h1><%= project.Name %> <%= HeadlightAppData.AppRecordNamePlural %></h1>
             </div>
             <div class="col-md-2 text-right actions">
-                <a href="/#projects/<%= project.IDProject %>/records/new" class="btn btn-success add-record"><i class="fa fa-plus"></i> New <%= HeadlightAppData.AppRecordName %></a>
+                <a href="<%= url('/projects/' + project.IDProject + '/records/new') %>" class="btn btn-success add-record"><i class="fa fa-plus"></i> New <%= HeadlightAppData.AppRecordName %></a>
             </div>
         </div>
         
@@ -22,7 +22,7 @@
                     <div class="icon"><i class="fa fa-folder-o"></i></div>
                     <h2>Nothing to see here...</h2>
                     <p>You don't have any <%= HeadlightAppData.AppRecordNamePlural.toLowerCase() %> yet. Get started by creating your first <%= HeadlightAppData.AppRecordName.toLowerCase() %>.</p>
-                    <a href="/#projects/<%= project.IDProject %>/records/new" class="btn btn-success"><i class="fa fa-plus"></i> Create a <%= HeadlightAppData.AppRecordName.toLowerCase() %></a>
+                    <a href="<%= url('/projects/' + project.IDProject + '/records/new') %>" class="btn btn-success"><i class="fa fa-plus"></i> Create <%= HeadlightAppData.AppRecordName.toLowerCase() %></a>
                 </div>
             <% } %>
             

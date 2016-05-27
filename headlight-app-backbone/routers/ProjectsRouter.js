@@ -9,28 +9,34 @@
 "use strict";
 
 var ProjectsRouter = Backbone.Router.extend({
+    
+    HeadlightAppData: null,
+    
+    initialize: function(options){
+        options || (options = {});
+        this.HeadlightAppData = options.HeadlightAppData;
+    },
 
     routes: {
-        'projects':     'projects',
-        'projects/new': 'newProject',
-        'projects/:id': 'editProject'
+        'headlightapp/:appHash/projects':     'projects',
+        'headlightapp/:appHash/projects/new': 'newProject',
+        'headlightapp/:appHash/projects/:id': 'editProject'
     },
     
-    projects: function() {
+    projects: function(appHash) {
         var projects = new ProjectsCollection();
-        var view = new ProjectListView({ collection: projects });
+        var view = new ProjectListView({ collection: projects, HeadlightAppData: this.HeadlightAppData });
         projects.fetch();
     },
     
-    newProject: function() {
+    newProject: function(appHash) {
         var project = new ProjectModel();
-        var view = new ProjectEditView({ model: project });
+        var view = new ProjectEditView({ model: project, HeadlightAppData: this.HeadlightAppData });
     },
     
-    editProject: function(id) {
-        console.log(id);
+    editProject: function(appHash, id) {
         var project = new ProjectModel({ IDProject: id });
-        var view = new ProjectEditView({ model: project });
+        var view = new ProjectEditView({ model: project, HeadlightAppData: this.HeadlightAppData });
         project.fetch();
     }
 

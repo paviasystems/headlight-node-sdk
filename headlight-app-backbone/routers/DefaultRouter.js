@@ -9,6 +9,13 @@
 "use strict";
 
 var DefaultRouter = Backbone.Router.extend({
+    
+    HeadlightAppData: null,
+    
+    initialize: function(options){
+        options || (options = {});
+        this.HeadlightAppData = options.HeadlightAppData;
+    },
 
     routes: {
         '':             'default',
@@ -16,7 +23,7 @@ var DefaultRouter = Backbone.Router.extend({
     },
     
     default: function(){
-        this.navigate('projects', { trigger: true, replace: true });
+        this.navigate('headlightapp/' + this.HeadlightAppData.AppHash + '/projects', { trigger: true, replace: true });
     },
     
     logout: function(){

@@ -1,8 +1,8 @@
 <script type="text/template" id="project-item-tmpl">
-    <td><a href="/#projects/<%= IDProject %>/records"><%= Name %></a></td>
+    <td><a href="<%= url('/projects/' + IDProject + '/records') %>"><%= Name %></a></td>
     <td class="text-right">
-        <a href="/#projects/<%= IDProject %>/records" class="btn btn-default" title="View Records"><i class="fa fa-folder-open-o"></i></a>
-        <button type="button" class="btn btn-default edit-project" title="Edit project"><i class="fa fa-wrench"></i></button>
+        <a href="<%= url('/projects/' + IDProject + '/records') %>" class="btn btn-default" title="View Records"><i class="fa fa-folder-open-o"></i></a>
+        <a href="<%= url('/projects/' + IDProject) %>" class="btn btn-default" title="Edit project"><i class="fa fa-wrench"></i></a>
         <button type="button" class="btn btn-default delete-project" title="Delete project"><i class="fa fa-trash"></i></button>
     </td>
 </script>

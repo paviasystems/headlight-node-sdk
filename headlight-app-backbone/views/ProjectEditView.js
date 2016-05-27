@@ -10,8 +10,14 @@
 
 var ProjectEditView = Backbone.View.extend({
     el: '#headlight-app',
+    
+    HeadlightAppData: null,
 
-    initialize: function() {
+    initialize: function(options) {
+        options || (options = {});
+        
+        this.HeadlightAppData = options.HeadlightAppData;
+        
         this.template = _.template($('#project-edit-tmpl').html());
 
         this.listenTo(this.model, 'sync', this.render);
@@ -22,7 +28,7 @@ var ProjectEditView = Backbone.View.extend({
     },
 
     render: function() {
-        var html = this.template(this.model.toJSON());
+        var html = this.template({ project: this.model.toJSON(), HeadlightAppData: this.HeadlightAppData });
         this.$el.html(html);
         
         this.$('.project-map').locationpicker({
@@ -64,7 +70,8 @@ var ProjectEditView = Backbone.View.extend({
         this.undelegateEvents();
         this.unbind();
         Backbone.Validation.unbind(this);
-        Backbone.history.navigate('projects', true);
+        
+        Backbone.history.navigate('headlightapp/' + this.HeadlightAppData.AppHash + '/projects', true);
     },
     
     showErrors: function(model, errors){
