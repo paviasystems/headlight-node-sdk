@@ -1,6 +1,6 @@
 {
   "name": "headlight-node-sdk",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Headlight - App Store Foundation SDK",
   "main": "server/Headlight-NodeSDK.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "vinyl-buffer": "^1.0.0",
     "gulp-uglify": "^1.5.3",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-util": "^3.0.0",
+    "gulp-util": "^3.0.7",
     "orator-session-remoteauth": "^1.0.4",
     "swill": "^1.0.7",
     "underscore": "^1.8.3"
