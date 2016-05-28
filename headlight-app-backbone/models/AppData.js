@@ -47,7 +47,7 @@ var AppDataCollection = Backbone.Collection.extend({
         }
     },
     url: function(){
-        return '1.0/AppDatas/FilteredTo/FBV~Type~EQ~' + this.contentType;
+        return '1.0/AppDatas/FilteredTo/FBV~Type~EQ~' + this.contentType+'~FBV~IDProject~EQ~' + this.options.projectId;
     },
     model: AppDataModel
 });
