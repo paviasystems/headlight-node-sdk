@@ -195,6 +195,8 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     				if (pict.features[tmpModuleName].hasOwnProperty('initialize'))
     				{
     					console.log('--> Auto initializing Headlight App: '+tmpModuleName);
+    					// Put convenience value into the pict.features.HeadlightApp object for last loaded app
+    					pict.features.HeadlightApp.LastLoadedApp = tmpModuleName;
     					pict.features[tmpModuleName].initialize(pict.session);
     					HeadlightApp.start(pData);
     				}

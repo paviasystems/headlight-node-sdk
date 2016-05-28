@@ -18,9 +18,16 @@ var ProjectsRouter = Backbone.Router.extend({
     },
 
     routes: {
+        'headlightapp/projects':     'projectsDefaultApp',
         'headlightapp/:appHash/projects':     'projects',
         'headlightapp/:appHash/projects/new': 'newProject',
         'headlightapp/:appHash/projects/:id': 'editProject'
+    },
+    
+    // Find the first Headlight App and go to its Projects list
+    projectsDefaultApp: function()
+    {
+        
     },
     
     projects: function(appHash) {
