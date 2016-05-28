@@ -48,7 +48,7 @@ var HeadlightApp = function()
 				SwillRoot: __dirname+'/../',
 
 				APIServerPort: 8080,
-				SessionTimeout: 60,
+				SessionTimeout: 60000,
 
 				// By default use the in-memory session store
 				SessionStrategy: "InMemory",
@@ -57,7 +57,7 @@ var HeadlightApp = function()
 				MemcachedURL: "192.168.99.100:11211",
 
 				// Load a config file if it is available
-				ConfigFile: __dirname+"/../Headlight-App-Config.json"
+				ConfigFile: __dirname+'/../../../headlight-app/server/HeadlightApp-Orator.json'
 			});
 		// Map in the passed-in settings and default settings
 		var _Settings = libUnderscore.extend({}, _SettingsDefaults, (typeof(pSettings) === 'object') ? pSettings : {});
