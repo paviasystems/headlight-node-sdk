@@ -221,6 +221,27 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     	}
     };
     
+    var Observation = {
+        search: function(expression, success, error){
+
+        },
+        load: function(id, success, error){
+            
+        },
+        save: function(record, success, error){
+            
+        }
+    }
+    
+    var Report = {
+        load: function(id, success, error){
+            
+        },
+        save: function(record, success, error){
+            
+        }
+    }
+    
     var AppData = {
         
         load: function(id, success, error){
