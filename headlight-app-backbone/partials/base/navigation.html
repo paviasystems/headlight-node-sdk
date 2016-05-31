@@ -5,13 +5,19 @@
 
 <script type="text/template" id="app-nav-tmpl">
     <ul class="nav navbar-nav navbar-left">
-        <li class="nav-item">
-            <a href="<%= url('/projects') %>">Projects</a>
-        </li>
-        <% if(project){ %>
-            <li class="nav-item animated fadeIn"><a href="<%= url('/projects') %>"><i class="fa fa-chevron-left"></i></a></li>
-            <li class="nav-item animated fadeIn">
-                <a href="<%= url('/projects/' + project.IDProject + '/records') %>"><%= project.Name %></a>
+        <% if(HeadlightAppData.ProjectList) { %>
+            <li class="nav-item">
+                <a href="<%= url('/projects') %>">Projects</a>
+            </li>
+            <% if(project){ %>
+                <li class="nav-item animated fadeIn"><a href="<%= url('/projects') %>"><i class="fa fa-chevron-left"></i></a></li>
+                <li class="nav-item animated fadeIn">
+                    <a href="<%= url('/projects/' + project.IDProject + '/records') %>"><%= project.Name %></a>
+                </li>
+            <% } %>
+        <% } else { %>
+            <li class="nav-item">
+                <a href="<%= url('/records') %>"><%= HeadlightAppData.AppRecordNamePlural %></a>
             </li>
         <% } %>
     </ul>

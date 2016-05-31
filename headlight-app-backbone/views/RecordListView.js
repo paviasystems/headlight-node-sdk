@@ -51,7 +51,7 @@ var RecordListView = Backbone.View.extend({
     },
 
     render: function() {
-        var html = this.template({ IDProject: this.collection.projectId, project: this.options.project.toJSON(), records: this.collection.toJSON(), HeadlightAppData: this.HeadlightAppData });
+        var html = this.template({ IDProject: this.collection.projectId, project: this.options.project ? this.options.project.toJSON() : {}, records: this.collection.toJSON(), HeadlightAppData: this.HeadlightAppData });
         this.$el.html(html);
 
         var $list = this.$('.list').empty();

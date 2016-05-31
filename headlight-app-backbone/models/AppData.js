@@ -27,7 +27,7 @@ var AppDataModel = Backbone.Model.extend({
     defaults: {
         IDAppData: 0,
         Type: null,
-        IDProject: null,
+        //IDProject: null,
         Title: null,
         Description: '',
         Datum: null
@@ -47,7 +47,7 @@ var AppDataCollection = Backbone.Collection.extend({
         }
     },
     url: function(){
-        return '1.0/AppDatas/FilteredTo/FBV~Type~EQ~' + this.contentType+'~FBV~IDProject~EQ~' + this.options.projectId;
+        return '1.0/AppDatas/FilteredTo/FBV~Type~EQ~' + this.contentType + (this.options.projectId ? '~FBV~IDProject~EQ~' + this.options.projectId : '');
     },
     model: AppDataModel
 });

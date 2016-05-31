@@ -1,7 +1,7 @@
 <script type="text/template" id="record-item-tmpl">
-    <td><a href="<%= url('/projects/' + IDProject + '/records/' + IDAppData) %>"><%= Title %></a></td>
+    <td><a href="<%= url((IDProject ? '/projects/' + IDProject : '') + '/records/' + IDAppData) %>"><%= Title %></a></td>
     <td class="text-right">
-        <a href="<%= url('/projects/' + IDProject + '/records/' + IDAppData) %>" class="btn btn-default edit" title="Edit record"><i class="fa fa-wrench"></i></a>
+        <a href="<%= url((IDProject ? '/projects/' + IDProject : '') + '/records/' + IDAppData) %>" class="btn btn-default edit" title="Edit record"><i class="fa fa-wrench"></i></a>
         <button type="button" class="btn btn-default delete"><i class="fa fa-trash"></i></button>
     </td>
 </script>

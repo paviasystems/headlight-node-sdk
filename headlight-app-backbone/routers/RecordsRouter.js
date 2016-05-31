@@ -18,42 +18,81 @@ var RecordsRouter = Backbone.Router.extend({
     },
 
     routes: {
+        'headlightapp/:appHash/records':         'list',
+        'headlightapp/:appHash/records/new':     'new',
+        'headlightapp/:appHash/records/:id':     'editWithoutProject',
         'headlightapp/:appHash/projects/:projectId/records':         'list',
         'headlightapp/:appHash/projects/:projectId/records/new':     'new',
         'headlightapp/:appHash/projects/:projectId/records/:id':     'edit'
     },
     
     list: function(appHash, projectId) {
-        var project = new ProjectModel({ IDProject: projectId });
-        var list = new AppDataCollection([], { projectId: projectId, type: this.HeadlightAppData.AppRecordHash });
-        var view = new RecordListView({ collection: list, project: project, HeadlightAppData: this.HeadlightAppData });
-        project.fetch();
-        list.fetch();
+        if(!projectId && this.HeadlightAppData.ProjectList){
+            console.log('No project ID specified when required.');
+            this.navigate('/', { trigger: true, replace: true });
+        }
+        else {
+            var project;
+            if(projectId){
+                project = new ProjectModel({ IDProject: projectId });
+                project.fetch();
+            }
+            var list = new AppDataCollection([], { projectId: projectId, type: this.HeadlightAppData.AppRecordHash });
+            var view = new RecordListView({ collection: list, project: project, HeadlightAppData: this.HeadlightAppData });
+            list.fetch();
+        }
     },
     
     new: function(appHash, projectId) {
-        projectId = parseInt(projectId);
-        var project = new ProjectModel({ IDProject: projectId });
-        project.fetch({ success: function(model, response){
-            var p = model.toJSON();
-            HeadlightApp.loadModule(p, { id: null, model: {} });
-        }});
-
-        //var model = new AppDataModel({ Type: this.HeadlightAppData.AppRecordHash }, { IDProject: projectId });
-        //var view = new RecordEditView({ model: model, HeadlightAppData: this.HeadlightAppData });
+        if(!projectId && this.HeadlightAppData.ProjectList){
+            console.log('No project ID specified when required.');
+            this.navigate('/', { trigger: true, replace: true });
+        }
+        else {
+            if(projectId){
+                projectId = parseInt(projectId);
+                var project = new ProjectModel({ IDProject: projectId });
+                project.fetch({ success: function(model, response){
+                    var p = model.toJSON();
+                    HeadlightApp.loadModule(p, { id: null, model: {} });
+                }});
+            }
+            else {
+                HeadlightApp.loadModule(null, { id: null, model: {} });
+            }
+        }
+    },
+    
+    editWithoutProject: function(appHash, id){
+        this.edit(appHash, null, id);  
     },
     
     edit: function(appHash, projectId, id) {
-        projectId = parseInt(projectId);
-        var project = new ProjectModel({ IDProject: projectId });
-        project.fetch({ success: function(model, response){
-            var projectModel = model.toJSON();
-            var recordModel = new AppDataModel({ IDAppData: id });
-            recordModel.fetch({ success: function(model, response){
-                var record = { id: id, model: model.get('Datum') };
-                HeadlightApp.loadModule(projectModel, record);
-            }});
-        }});
+        if(!projectId && this.HeadlightAppData.ProjectList){
+            console.log('No project ID specified when required.');
+            this.navigate('/', { trigger: true, replace: true });
+        }
+        else {
+            if(projectId){
+                projectId = parseInt(projectId);
+                var project = new ProjectModel({ IDProject: projectId });
+                project.fetch({ success: function(model, response){
+                    var projectModel = model.toJSON();
+                    var recordModel = new AppDataModel({ IDAppData: id });
+                    recordModel.fetch({ success: function(model, response){
+                        var record = { id: id, model: model.get('Datum') };
+                        HeadlightApp.loadModule(projectModel, record);
+                    }});
+                }});
+            }
+            else {
+                var recordModel = new AppDataModel({ IDAppData: id });
+                recordModel.fetch({ success: function(model, response){
+                    var record = { id: id, model: model.get('Datum') };
+                    HeadlightApp.loadModule(null, record);
+                }});
+            }
+        }
     }
 
 });

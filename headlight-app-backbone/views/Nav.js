@@ -43,7 +43,7 @@ var NavigationView = Backbone.View.extend({
 
     render: function() {
         
-        var html = this.template({ project: (this.currentProject ? this.currentProject.toJSON() : null) });
+        var html = this.template({ project: (this.currentProject ? this.currentProject.toJSON() : null), HeadlightAppData: pict.features.HeadlightApp.getModuleData() });
         this.$el.html(html);
 
         return this;

@@ -9,7 +9,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     
     var headlightAppData, session, currentProject;
     
-    this.checkSessionStatus = function()
+    var checkSessionStatus = function()
     {
     	$.ajax
     	(
@@ -64,7 +64,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     
     this.initialize = function(){
         bootstrap();
-        this.checkSessionStatus();
+        checkSessionStatus();
     };
     
     this.start = function(appData){
@@ -221,6 +221,11 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     	}
     };
     
+    this.getModuleData = function(){
+        return headlightAppData;  
+    };
+    
+    // Data proxies
     var Observation = {
         search: function(expression, success, error){
 
@@ -264,11 +269,14 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         save: function(record, success, error) {
             var r = new AppDataModel({ 
                 IDAppData: record.id || 0, 
-                IDProject: currentProject.get('IDProject'),
                 Type: headlightAppData.AppRecordHash,
                 Title: record.model.Title || (headlightAppData.AppRecordName + ' ' + (record.id || '')),
                 Datum: record.model
             });
+            if(currentProject){
+                r.set('IDProject', currentProject.get('IDProject'));
+            }
+            console.log(r.toJSON());
             r.save(null, { success: function(model, response){
                 if(typeof(success) === 'function'){
                     var record = { 
@@ -288,14 +296,18 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     return {
         initialize: this.initialize,
         start: this.start,
-
-        checkSessionStatus: this.checkSessionStatus,
+        
+        getModuleData: this.getModuleData,
 
         // module init
         initializeModule: this.initializeModule,
         loadModule: this.loadModule,
         
-        // data proxies
-        AppData: AppData
+        // data proxies,
+        Data: {
+            AppData: AppData,
+            Observation: Observation,
+            Report: Report
+        }
     };
 })();
