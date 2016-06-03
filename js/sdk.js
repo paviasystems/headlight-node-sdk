@@ -81,7 +81,6 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     };
     
     var routeChanged = function(router, routeName, parameters){
-        console.log('routeChanged');
         // Can't figure out a better way to do this...
         var frags = Backbone.history.fragment.toLowerCase().split('/');
         var index;
@@ -227,70 +226,202 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     
     // Data proxies
     var Observation = {
-        search: function(expression, success, error){
+        search: function(expression, options){
+            options || (options = {});
 
         },
-        load: function(id, success, error){
+        load: function(id, options){
+            options || (options = {});
             
         },
-        save: function(record, success, error){
+        save: function(record, options){
+            options || (options = {});
             
         }
     }
     
     var Report = {
-        load: function(id, success, error){
+        load: function(id, options){
+            options || (options = {});
             
         },
-        save: function(record, success, error){
+        save: function(record, options){
+            options || (options = {});
             
         }
     }
     
     var AppData = {
         
-        load: function(id, success, error){
+        load: function(id, options){
+            options || (options = {});
             
             var r = new AppDataModel({ IDAppData: id });
             r.fetch({ success: function(model, response){
-                if(typeof(success) === 'function'){
+                if(typeof(options.success) === 'function'){
                     var record = { 
                         id: response.IDAppData,
                         model: response.Datum
                     };
-                    success(record);
+                    options.success(record);
                 }
             }, error: function(){
-                if(typeof(error) === 'function') error();
+                if(typeof(options.error) === 'function') options.error();
             }});
             
         },
         
-        save: function(record, success, error) {
+        save: function(record, options) {
+            options || (options = {});
+
             var r = new AppDataModel({ 
                 IDAppData: record.id || 0, 
+                AppHash: headlightAppData.AppHash,
                 Type: headlightAppData.AppRecordHash,
-                Title: record.model.Title || (headlightAppData.AppRecordName + ' ' + (record.id || '')),
                 Datum: record.model
             });
             if(currentProject){
                 r.set('IDProject', currentProject.get('IDProject'));
             }
-            console.log(r.toJSON());
             r.save(null, { success: function(model, response){
-                if(typeof(success) === 'function'){
+                if(response && response.Error){
+                    if(typeof(options.error) === 'function') options.error(response);
+                }
+                else if(typeof(options.success) === 'function'){
                     var record = { 
                         id: response.IDAppData,
                         model: response.Datum
                     };
-                    success(record);
+                    options.success(record);
                 }
             }, error: function(){
-                if(typeof(error) === 'function') error();
+                if(typeof(options.error) === 'function') options.error();
             }});
         }
     };
     
+    var AppArtifact = {
+        load: function(id, options) {
+            options || (options = {});
+            
+            var r = new AppArtifactModel({ IDAppArtifact: id });
+            r.fetch({ success: function(model, response){
+                if(typeof(options.success) === 'function'){
+                    var record = { 
+                        id: response.IDAppArtifact,
+                        model: response
+                    };
+                    options.success(record);
+                }
+            }, error: function(){
+                if(typeof(options.error) === 'function') options.error();
+            }});
+
+        },
+        
+        save: function(record, options){
+            options || (options = {});
+
+            var r = new AppArtifactModel({ 
+                IDAppArtifact: record.id || 0,
+                AppHash: headlightAppData.AppHash,
+                Type: headlightAppData.AppRecordHash
+            });
+            if(currentProject){
+                r.set('IDProject', currentProject.get('IDProject'));
+            }
+            if(record.model.FileName){
+                r.set('FileName', record.model.FileName);
+            }
+            r.save(null, { success: function(model, response){
+                if(response && response.Error){
+                    if(typeof(options.error) === 'function') options.error(response);
+                }
+                if(typeof(options.success) === 'function'){
+                    var record = { 
+                        id: response.IDAppArtifact,
+                        artifact: response.Artifact,
+                        model: response
+                    };
+                    options.success(record);
+                }
+            }, error: function(err){
+                if(typeof(options.error) === 'function') options.error(err);
+            }});
+        }
+    };
+    
+    var Artifact = {
+        upload: function(id, file, options){
+            options || (options = {});
+            
+            if(!id) throw new Error('An Artifact ID is required to upload a file');
+            if(!file) throw new Error('file is required');
+            
+            $.ajax({
+                url: '/1.0/Artifact/Media/' + id + '/1',
+                data: file,
+                cache: false,
+                contentType: file.type,
+                processData: false,
+                type: 'POST',
+                xhr: function() {
+                    var xhr = $.ajaxSettings.xhr();
+                    if(typeof(options.progress) === 'function'){
+                        xhr.upload.onprogress = function(e) {
+                            var percentComplete = Math.floor(e.loaded / e.total *100);
+                            options.progress(percentComplete);
+                        };
+                    }
+                    return xhr;
+                }
+            })
+            .done(function(response, textStatus, jqXhr){
+                if(response && response.Error){
+                    if(typeof(options.error) === 'function') options.error(response);
+                }
+                if(typeof(options.success) === 'function'){
+                    var record = { 
+                        id: response.IDAppArtifact,
+                        artifact: response.Artifact,
+                        model: response
+                    };
+                    options.success(record);
+                }
+            })
+            .fail(function(err){
+                if(typeof(options.error) === 'function') options.error(err);
+            });
+        },
+        
+        download: function(id, options){
+            options || (options = {});
+            
+            if(!id) throw new Error('An Artifact ID is required to download a file');
+
+            $.ajax({
+                url: '/1.0/Artifact/Media/' + id + '/1',
+                type: 'GET'
+            })
+            .done(function(response, textStatus, jqXhr){
+                if(response && response.Error){
+                    if(typeof(options.error) === 'function') options.error(response);
+                }
+                if(typeof(options.success) === 'function'){
+                    var ct = jqXhr.getResponseHeader("content-type") || "";
+                    var record = {
+                        id: id,
+                        contentType: ct,
+                        data: response
+                    };
+                    options.success(record);
+                }
+            })
+            .fail(function(err){
+                if(typeof(options.error) === 'function') options.error(err);
+            });
+        }
+    };
     
 
     return {
@@ -306,6 +437,8 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         // data proxies,
         Data: {
             AppData: AppData,
+            AppArtifact: AppArtifact,
+            Artifact: Artifact,
             Observation: Observation,
             Report: Report
         }

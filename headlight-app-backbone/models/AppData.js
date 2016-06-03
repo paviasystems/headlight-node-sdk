@@ -28,13 +28,14 @@ var AppDataModel = Backbone.Model.extend({
         IDAppData: 0,
         Type: null,
         //IDProject: null,
-        Title: null,
+        AppHash: null,
+        //Title: null,
         Description: '',
         Datum: null
     },
     validation: {
-        Type: { required: true },
-        Title: { required: true }
+        AppHash: { required: true },
+        Type: { required: true }
     }
 });
 
@@ -47,7 +48,10 @@ var AppDataCollection = Backbone.Collection.extend({
         }
     },
     url: function(){
-        return '1.0/AppDatas/FilteredTo/FBV~Type~EQ~' + this.contentType + (this.options.projectId ? '~FBV~IDProject~EQ~' + this.options.projectId : '');
+        var baseUrl = '1.0/AppDatas/FilteredTo/FBV~Type~EQ~' + this.contentType;
+        if(this.options.projectId)
+            baseUrl += '~FBV~IDProject~EQ~' + this.options.projectId;
+        return baseUrl;
     },
     model: AppDataModel
 });

@@ -10,14 +10,17 @@
 
 var RecordListItemView = Backbone.View.extend({
     tagName: 'tr',
+    HeadlightAppData: null,
     
-    initialize: function() {
+    initialize: function(options) {
+        options || (options = {});
         this.template = _.template($('#record-item-tmpl').html());
         //this.listenTo(this.model, 'destroy', this.remove)
+        this.HeadlightAppData = options.HeadlightAppData;
     },
     
     render: function() {
-        var html = this.template(this.model.toJSON());
+        var html = this.template({ record: this.model.toJSON(), HeadlightAppData: this.HeadlightAppData });
         this.$el.html(html);
         return this;
     },
@@ -57,7 +60,7 @@ var RecordListView = Backbone.View.extend({
         var $list = this.$('.list').empty();
         
         this.collection.each(function(model) {
-            var item = new RecordListItemView({model: model});
+            var item = new RecordListItemView({ model: model, HeadlightAppData: this.HeadlightAppData });
             $list.append(item.render().$el);
         }, this);
         
