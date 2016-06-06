@@ -33,6 +33,7 @@ var _Swill = require('headlight-node-sdk').new({StaticContentFolder: __dirname+'
 Remember to set your node enviroment to a modern version of node.  You can do this by running the following in the terminal:
 
 ```
+nvm install 5.8
 nvm use 5.8
 nvm alias default 5.8
 ```
@@ -135,7 +136,7 @@ The SDK will take care of starting up a server and serving the files from your `
 While building your app you may want to store or retrieve data from the Headlight platform.  The records created by your app can be retrieved and saved via the `AppData` API proxy.  Using the API can look like this:
 
 ```
-HeadlightApp.Data.AppData.save({ id: 42, model: model }, { success: function(response){
+pict.features.HeadlightApp.Data.AppData.save({ id: 42, model: model }, { success: function(response){
     console.log('saved!', response);
 });
 ```

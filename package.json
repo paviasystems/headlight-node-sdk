@@ -17,16 +17,17 @@
   },
   "homepage": "https://github.com/paviasystems/headlight-node-sdk#readme",
   "dependencies": {
+    "browserify": "^13.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "*",
-    "browserify": "^13.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "vinyl-buffer": "^1.0.0",
-    "gulp-uglify": "^1.5.3",
+    "gulp-sass": "^2.3.1",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "orator-session-remoteauth": "^1.0.4",
     "swill": "^1.0.7",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

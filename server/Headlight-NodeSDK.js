@@ -291,12 +291,22 @@ var HeadlightApp = function()
 						        .pipe(require('gulp-concat')('sdk-scripts.js'))
 						        .pipe(gulp.dest(_Swill.settings.Site.Destination+'js/'));
 			});
+			
+			gulp.task('app-sass', function(){
+				var paths = [_Swill.settings.Build.Source+'../../headlight-app/css/**/Headlight-App.scss'];
+			    return gulp.src(paths)
+			        .pipe(require('gulp-sass')({
+			            style: 'compressed',
+			            quiet: false
+			        }))
+					.pipe(gulp.dest(_Swill.settings.Site.Destination+'headlight-app/'));
+			});
 		
 			// ### TASK: Build and stage the full application
-			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'compile-app-script-debug']);
+			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'compile-app-script-debug', 'app-sass']);
 		
 			// ### TASK: Build and stage the full application for debug
-			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'compile-app-script-debug']);
+			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'compile-app-script-debug', 'app-sass']);
 
 			return _Swill;
 		};

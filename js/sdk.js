@@ -191,13 +191,20 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     			    headlightAppData = pData;
     				tmpModuleName = pData.AppHash;
     				// Load the module (maybe wrap this in try catch eventually)
-    				if (pict.features[tmpModuleName].hasOwnProperty('initialize'))
+    				if(!pict.features[tmpModuleName]){
+    				    console.log('ERROR: Could not find pict module with name: ' + tmpModuleName);
+    				}
+    				else if (pict.features[tmpModuleName].hasOwnProperty('initialize'))
     				{
     					console.log('--> Auto initializing Headlight App: '+tmpModuleName);
     					// Put convenience value into the pict.features.HeadlightApp object for last loaded app
     					pict.features.HeadlightApp.LastLoadedApp = tmpModuleName;
     					pict.features[tmpModuleName].initialize(pict.session);
     					HeadlightApp.start(pData);
+    				}
+    				
+    				if(pData.AppTitle){
+    				    document.title = 'Pavia Systems - ' + pData.AppTitle;
     				}
     			}
     		}
