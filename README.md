@@ -54,6 +54,7 @@ A Headlight app contains a few key files.
 │   │   ├── Other-Arbitrary-Markup-Files.html
 │   ├── scripts/
 │   │   ├── Headlight-App.js
+│   │   ├── Other-Arbitrary-Javascript-Files.js
 ├── stage/
 │   ├── *** Automatically Generated ***
 ├── gulpfile.js
@@ -62,6 +63,13 @@ A Headlight app contains a few key files.
 ```
 
 Refer to the [Headlight-Node-SDK-Sample](https://github.com/paviasystems/headlight-node-sdk-sample) project for more information.
+
+The primary app Javascript file, `Headlight-App.js`, will be compiled using [Browserify](http://browserify.org/).  Therefore, you can include any other arbitrary javascript file using the following syntax:
+
+```
+require('./Other-Arbitrary-Javascript-Files.js');
+```
+
 
 #### App Entry Point
 
