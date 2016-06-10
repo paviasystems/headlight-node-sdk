@@ -203,8 +203,8 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     					HeadlightApp.start(pData);
     				}
     				
-    				if(pData.AppTitle){
-    				    document.title = 'Pavia Systems - ' + pData.AppTitle;
+    				if(pData.AppName){
+    				    document.title = 'Pavia Systems - ' + pData.AppName;
     				}
     			}
     		}
@@ -259,6 +259,16 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     }
     
     var AppData = {
+        
+        list: function(options){
+            var collection = new AppDataCollection([], options);
+            collection.fetch({ success: function(collection, models, jqXhr){
+                var records = models.map(function(m) { return { id: m.IDAppData, model: m.Datum }; });
+               if(typeof(options.success) === 'function') options.success.call(null, records); 
+            }, error: function(err) {
+                if(typeof(options.error) === 'function') options.error.call(null, err);
+            }});
+        },
         
         load: function(id, options){
             options || (options = {});
