@@ -255,12 +255,23 @@ var HeadlightApp = function()
 			
 			var gulp = _Swill.gulp;
 			
-			/********************************************************
-			 * TASK: Build the module for the browser
-			 *   This gulp task is taken from the gulp recipe repository:
-			 *   https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md
-			 */
-			gulp.task('compile-app-script-debug',
+			// ### TASK: Concatenate all the SDK scripts into one file: sdk-scripts.js
+			gulp.task('sdk-scripts-concat', function(){ 
+				
+				var scripts = [
+				    _Swill.settings.Build.Source+'js/sdk.js',
+				    _Swill.settings.Build.Source+'headlight-app-backbone/models/**/*.js',
+				    _Swill.settings.Build.Source+'headlight-app-backbone/views/**/*.js',
+				    _Swill.settings.Build.Source+'headlight-app-backbone/routers/**/*.js'
+				];
+	
+			    return gulp.src(scripts)
+						        .pipe(require('gulp-concat')('sdk-scripts.js'))
+						        .pipe(gulp.dest(_Swill.settings.Site.Destination+'js/'));
+			});
+			
+			// ### TASK: compile all script files in the app using Browserify
+			gulp.task('app-script-debug',
 				function ()
 				{
 					// set up the custom browserify instance for this task
@@ -277,21 +288,7 @@ var HeadlightApp = function()
 				}
 			);
 			
-			// ### TASK: Build and stage the full application
-			gulp.task('sdk-scripts-concat', function(){ 
-				
-				var scripts = [
-				    _Swill.settings.Build.Source+'js/sdk.js',
-				    _Swill.settings.Build.Source+'headlight-app-backbone/models/**/*.js',
-				    _Swill.settings.Build.Source+'headlight-app-backbone/views/**/*.js',
-				    _Swill.settings.Build.Source+'headlight-app-backbone/routers/**/*.js'
-				];
-	
-			    return gulp.src(scripts)
-						        .pipe(require('gulp-concat')('sdk-scripts.js'))
-						        .pipe(gulp.dest(_Swill.settings.Site.Destination+'js/'));
-			});
-			
+			// ### TASK: compile all SASS files in the app
 			gulp.task('app-sass', function(){
 				var paths = [_Swill.settings.Build.Source+'../../headlight-app/css/**/Headlight-App.scss'];
 			    return gulp.src(paths)
@@ -303,10 +300,10 @@ var HeadlightApp = function()
 			});
 		
 			// ### TASK: Build and stage the full application
-			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'compile-app-script-debug', 'app-sass']);
+			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'app-script-debug', 'app-sass']);
 		
 			// ### TASK: Build and stage the full application for debug
-			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'compile-app-script-debug', 'app-sass']);
+			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'app-script-debug', 'app-sass']);
 
 			return _Swill;
 		};
