@@ -1,5 +1,5 @@
 <script type="text/template" id="record-item-tmpl">
-    <td><a href="<%= url((record.IDProject ? '/projects/' + record.IDProject : '') + '/records/' + record.IDAppData) %>"><%= record.Title || (HeadlightAppData.AppRecordName + ' ' + record.IDAppData) %></a></td>
+    <td><a href="<%= url((record.IDProject ? '/projects/' + record.IDProject : '') + '/records/' + record.IDAppData) %>"><%= (record.Datum && record.Datum.Title) ? record.Datum.Title: (HeadlightAppData.AppRecordName + ' ' + record.IDAppData) %></a></td>
     <td class="text-right">
         <a href="<%= url((record.IDProject ? '/projects/' + record.IDProject : '') + '/records/' + record.IDAppData) %>" class="btn btn-default edit" title="Edit record"><i class="fa fa-wrench"></i></a>
         <button type="button" class="btn btn-default delete"><i class="fa fa-trash"></i></button>

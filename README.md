@@ -158,3 +158,7 @@ The following data proxies are available:
 * Artifact
 * Observation
 * Report
+
+You will generally store all of your app's data in an `AppData` container.
+
+If the JSON object you store in the `AppData` container has a `Title` attribute, it will be used on the Record List screen.
