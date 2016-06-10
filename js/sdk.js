@@ -97,6 +97,10 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
 
     };
     
+    this.getCurrentProject = function(){
+        return currentProject;
+    };
+    
     var bootstrap = function(){
         
         Backbone.ajax = function(params){
@@ -446,6 +450,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         start: this.start,
         
         getModuleData: this.getModuleData,
+        getCurrentProject: this.getCurrentProject,
 
         // module init
         initializeModule: this.initializeModule,
