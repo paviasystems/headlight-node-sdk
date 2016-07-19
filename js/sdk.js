@@ -351,9 +351,17 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
             if(currentProject){
                 r.set('IDProject', currentProject.get('IDProject'));
             }
+            var datum = {};
             if(record.model.FileName){
-                r.set('FileName', record.model.FileName);
+                datum.FileName = record.model.FileName;
             }
+            if(record.model.Title){
+                datum.Title = record.model.Title;
+            }
+            if(record.model.Description){
+                datum.Description = record.model.Description;
+            }
+            r.set('Datum', datum);
             r.save(null, { success: function(model, response){
                 if(response && response.Error){
                     if(typeof(options.error) === 'function') options.error(response);

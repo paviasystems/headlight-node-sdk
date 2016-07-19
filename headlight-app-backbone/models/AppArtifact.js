@@ -32,7 +32,8 @@ var AppArtifactModel = Backbone.Model.extend({
         IDAppArtifact: 0,
         AppHash: null,
         Type: null,
-        FileName: null
+        FileName: null,
+        Datum: null
     },
     validation: {
         AppHash: { required: true },
