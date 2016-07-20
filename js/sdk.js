@@ -361,7 +361,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
             if(record.model.Description){
                 datum.Description = record.model.Description;
             }
-            r.set('Datum', datum);
+            r.set('Artifact', { Datum: datum });
             r.save(null, { success: function(model, response){
                 if(response && response.Error){
                     if(typeof(options.error) === 'function') options.error(response);
