@@ -351,16 +351,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
             if(currentProject){
                 r.set('IDProject', currentProject.get('IDProject'));
             }
-            var datum = {};
-            if(record.model.FileName){
-                datum.FileName = record.model.FileName;
-            }
-            if(record.model.Title){
-                datum.Title = record.model.Title;
-            }
-            if(record.model.Description){
-                datum.Description = record.model.Description;
-            }
+            var datum = _.extend({}, record.model);
             r.set('Artifact', { Datum: datum });
             r.save(null, { success: function(model, response){
                 if(response && response.Error){
