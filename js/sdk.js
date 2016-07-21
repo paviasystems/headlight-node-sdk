@@ -137,7 +137,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
                 if(typeToClass[typeof(value)] !== customValue) return 'Not the correct type.';
             },
             enum: function(value, attr, customValue, model){
-                if(!customValue || customValue.indexOf(value) < 0) return 'Not a valid value';
+                if(!customValue || !customValue[value]) return 'Not a valid value';
             }
         });
         
