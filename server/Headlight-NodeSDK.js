@@ -223,7 +223,7 @@ var HeadlightApp = function()
 			_Swill.addAssetCopy({Input:'assets/images/**/*.*', Output:'images/'});
 			_Swill.addAssetCopy({Input:'assets/fonts/**/*.*', Output:'fonts/'});
 			// Assets from the app itself
-			_Swill.addAssetCopy({Input:'../../assets/images/**/*.*', Output:'images/'});
+			_Swill.addAssetCopy({Input:'../../headlight-app/images/**/*.*', Output:'headlight-app/'});
 			_Swill.addAssetCopy({Input:'../../headlight-app/css/Headlight-App.css', Output:'headlight-app/'});
 
 			// The login page
