@@ -30,7 +30,7 @@ var AppDataModel = Backbone.Model.extend({
         //IDProject: null,
         AppHash: null,
         //Title: null,
-        Description: '',
+        //Description: '',
         Datum: null
     },
     validation: {
