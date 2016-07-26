@@ -3,7 +3,7 @@
     
         <div class="row">
             <div class="col-md-10">
-                <h1><%= HeadlightAppData.AppRecordNamePlural %>: <%= project.Name %></h1>
+                <h1><%= HeadlightAppData.AppRecordNamePlural %><%= project.Name ? ': ' + project.Name : '' %></h1>
             </div>
             <div class="col-md-2 text-right actions">
                 <a href="<%= url((HeadlightAppData.ProjectList ? '/projects/' + project.IDProject : '') + '/records/new') %>" class="btn btn-success add-record"><i class="fa fa-plus"></i> New <%= HeadlightAppData.AppRecordName %></a>
