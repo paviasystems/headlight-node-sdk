@@ -466,6 +466,83 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         }
     };
     
+    this.filterObservations = function (pFilterObject, fCallBack, pCap, pBegin)
+	{
+	    var tmpFilterObject = (typeof(pFilterObject) === 'object') ? pFilterObject : {};
+	    var tmpCallBack = (typeof(fCallBack) === 'function') ? fCallBack : (function(){});
+
+		var tmpCap = 50;
+		var tmpBegin = 0;
+		if (typeof(pBegin) === 'number')
+		{
+			tmpBegin = pBegin;
+		}
+		if (typeof(pCap) === 'number')
+		{
+			tmpCap = pCap;
+		}
+	    var tmpAPIReadListURI = '1.0/ObservationsFilter/'+tmpBegin+'/'+tmpCap;
+		console.log('--> Reading Filtered Observation List: '+tmpAPIReadListURI);
+
+		// Get starting millisecond
+		var tmpOperationStartTime = +new Date();
+
+		$.ajax
+		(
+			{
+				type: 'POST',
+				url: tmpAPIReadListURI,
+				contentType: 'application/json',
+				datatype: 'json',
+				data: JSON.stringify(tmpFilterObject),
+				async: true
+			}
+		)
+		.done
+		(
+			function (pData)
+			{
+				if (typeof(pData.Error) !== 'undefined' && pData.Error.indexOf('authenticat') > -1)
+				{
+					console.log('##> There was a problem retreiving a filtered Observation list -- authentication issues: '+pData.Error);
+				}
+				if (typeof(pData.Error) !== 'undefined')
+				{
+					console.log('##> There was a problem retreiving a filtered Observation list: '+pData.Error);
+				}
+
+				var tmpOperationEndTime = +new Date();
+				var tmpOperationTime = tmpOperationEndTime - tmpOperationStartTime;
+				console.log('  > AJAX Request Read Observation List Completed ('+tmpOperationTime+'ms)');
+				
+				tmpCallBack(pData);
+
+				return false;
+			}
+		)
+		.fail
+		(
+			function ()
+			{
+				console.log('There has been an error retreiving the filtered Observation list.');
+				tmpCallBack(false);
+				return false;
+			}
+		);
+
+		return false;
+	};
+		
+	this.getObservationImageURL = function(pObservation, pImageType)
+	{
+	    var tmpImageType = (typeof(pImageType) !== 'undefined') ? pImageType : 'Standard';
+
+	    if ((typeof(pObservation) !== 'object') || (!pObservation.hasOwnProperty('IDObservation')))
+    	    return '';
+
+	    return '1.0/Observation/'+pObservation.IDObservation+'/Image/'+tmpImageType;
+	};
+    
 
     return {
         initialize: this.initialize,
@@ -477,6 +554,10 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         // module init
         initializeModule: this.initializeModule,
         loadModule: this.loadModule,
+        
+        // Observation Filtering
+        filterObservations: this.filterObservations,
+        getObservationImageURL: this.getObservationImageURL,
         
         // data proxies,
         Data: {
