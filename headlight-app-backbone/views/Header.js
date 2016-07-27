@@ -19,6 +19,12 @@ var HeaderView = Backbone.View.extend({
     render: function() {
         var html = this.template();
         this.$el.html(html);
+        
+        var appData = pict.features.HeadlightApp.getModuleData();
+        if(appData && appData.Page.Logo){
+            this.$('.app-logo').append('<a href="/"><img src="/headlight-app/' + appData.Page.Logo + '" title="' + appData.AppName + '" /></a>');
+        }
+        
         return this;
     },
 

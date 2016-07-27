@@ -267,7 +267,13 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
         list: function(options){
             var collection = new AppDataCollection([], options);
             collection.fetch({ success: function(collection, models, jqXhr){
-                var records = models.map(function(m) { return { id: m.IDAppData, model: m.Datum }; });
+                var records = models.map(function(m) {
+                    var record = { id: m.IDAppData, model: m.Datum };
+                    _.each(_.keys(_.omit(m, ['IDAppData', 'Datum'])), function(key){
+                        record[key] = m[key];
+                    });
+                    return record; 
+                });
                if(typeof(options.success) === 'function') options.success.call(null, records); 
             }, error: function(err) {
                 if(typeof(options.error) === 'function') options.error.call(null, err);
@@ -284,6 +290,11 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
                         id: response.IDAppData,
                         model: response.Datum
                     };
+                    
+                    _.each(_.keys(_.omit(response, ['IDAppData', 'Datum'])), function(key){
+                        record[key] = response[key];
+                    });
+                    
                     options.success(record);
                 }
             }, error: function(){
@@ -301,9 +312,18 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
                 Type: headlightAppData.AppRecordHash,
                 Datum: record.model
             });
+
+            // if we have an active project, link to it
             if(currentProject){
                 r.set('IDProject', currentProject.get('IDProject'));
             }
+            
+            // also copy over any additional, non-function properties that might have been passed in (eg Title, Description, etc)
+            var keys = _.keys(_.omit(_.omit(record, ['id', 'model']), function(x) { return _.isFunction(x); }));
+            _.each(keys, function(key){
+                r.set(key, record[key]);
+            });
+
             r.save(null, { success: function(model, response){
                 if(response && response.Error){
                     if(typeof(options.error) === 'function') options.error(response);
@@ -313,6 +333,9 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
                         id: response.IDAppData,
                         model: response.Datum
                     };
+                    _.each(_.keys(_.omit(response, ['IDAppData', 'Datum'])), function(key){
+                        record[key] = response[key];
+                    });
                     options.success(record);
                 }
             }, error: function(){

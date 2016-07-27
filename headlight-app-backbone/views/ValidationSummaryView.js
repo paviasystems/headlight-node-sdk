@@ -21,8 +21,6 @@ var ValidationSummaryView = Backbone.View.extend({
         var html = this.template();
         this.$el.html(html);
         
-        console.log(this.model);
-        
         var $list = this.$('.summary-list').empty();
         
         for(var p in this.model){
