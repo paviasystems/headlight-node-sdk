@@ -1,0 +1,28 @@
+<script type="text/template" id="{{AppHash}}_Main">
+    <h2>{{AppName}}</h2>
+    <div class="col-sm-12 box">
+        <form id="{{AppHash}}_Form" class="form-horizontal">
+        <fieldset>
+            <div class="form-group col-sm-6">
+                <label for="left_value">Left</label>
+                <input type="text" class="form-control" id="left_value" value="<%= model.Left %>">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="right_value">Right</label>
+                <input type="text" class="form-control" id="right_value" value="<%= model.Right %>">
+            </div>
+    
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-success"><i class="fa fa-pie-chart"></i> Calculate</button>
+                <button type="button" class="btn btn-primary" id="{{AppHash}}_Save_Button"><i class="fa fa-rocket"></i> Save</button>
+            </div>
+        </fieldset>
+        </form>
+    </div>
+    <div class="col-sm-12">
+        <h4 id="{{AppHash}}_Result"></h4>
+    </div>
+    <div class="col-sm-12">
+        <h4 id="{{AppHash}}_Messages"></h4>
+    </div>
+</script>

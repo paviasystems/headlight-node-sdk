@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var libChildProcess = require('child_process');
+
+var Templatizer = libChildProcess.exec('node '+__dirname+'/../node_modules/rock/bin/rock '+process.cwd()+' -r '+__dirname+'/../rock', {env: process.env, stdio: [process.stdin,'pipe','pipe']});
+
+Templatizer.stdout.on('data', 
+    function (pData) 
+    {
+        console.log(pData.toString());
+    });
+
+Templatizer.stderr.on('data', 
+    function (pData) 
+    {
+        console.error(pData.toString());
+    });
+
+Templatizer.on('exit', 
+    function (pExitCode) 
+    {
+        process.exit(pExitCode);
+    });
+
+process.stdin.pipe(Templatizer.stdin);
