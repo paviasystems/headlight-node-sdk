@@ -1,6 +1,6 @@
 {
   "name": "headlight-node-sdk",
-  "version": "2.1.19",
+  "version": "2.1.20",
   "description": "Headlight - App Store Foundation SDK",
   "main": "server/Headlight-NodeSDK.js",
   "scripts": {
@@ -14,6 +14,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/paviasystems/headlight-node-sdk/issues"
+  },
+  "bin": {
+    "headlight-node-sdk-bootstrap": "./bin/headlight-node-sdk-bootstrap"
   },
   "homepage": "https://github.com/paviasystems/headlight-node-sdk#readme",
   "dependencies": {
