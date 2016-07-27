@@ -21,7 +21,7 @@ pict.features.{{AppHash}}.load = function(pRecord, pProject, pSession)
 	// Load the template for the app from the DOM
 	var tmpAppTemplate = _.template($('#{{AppHash}}_Main').html());
 	// Render the initial view for the app
-	$('#headlight-app').html(template(pRecord));
+	$('#headlight-app').html(tmpAppTemplate(pRecord));
 
 	// Wire the submit for the form to our apps logic
 	$('#{{AppHash}}_Form').submit(
