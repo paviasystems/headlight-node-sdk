@@ -2,7 +2,7 @@
 
 var libChildProcess = require('child_process');
 
-var tmpRockCommand = 'node '+__dirname+'/../node_modules/rock/bin/rock '+process.cwd()+' -r git@github.com:paviasystems/headlight-node-sdk-template.git';
+var tmpRockCommand = 'node '+__dirname+'/../node_modules/rock/bin/rock '+process.cwd()+'/application -r git@github.com:paviasystems/headlight-node-sdk-template.git';
 console.log('Executing template (rock) command: '+tmpRockCommand);
 console.log('...Cloud9 has a permissions error that does not matter');
 var Templatizer = libChildProcess.exec(tmpRockCommand, {env: process.env, stdio: [process.stdin,'pipe','pipe']});
