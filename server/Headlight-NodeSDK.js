@@ -31,7 +31,7 @@ var HeadlightApp = function()
 				ProductVersion: require(__dirname+'/../package.json').version,
 
 				// By default, Apps authenticate and proxy to the QA environment
-				AuthenticationServerURL: "http://headlight.qa.paviasystems.com/1.0/",
+				AuthenticationServerURL: "https://headlightstg.paviasystems.com/1.0/",
 				// Pass through the POST authentication API
 				AuthTypes: ['POST'],
 
