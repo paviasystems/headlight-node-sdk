@@ -30,8 +30,8 @@ var HeadlightApp = function()
 				// Defaults to the version of the SDK, but this should be overridden
 				ProductVersion: require(__dirname+'/../package.json').version,
 
-				// By default, Apps authenticate and proxy to the QA environment
-				AuthenticationServerURL: "http://headlight.qa.paviasystems.com/1.0/",
+				// By default, Apps authenticate and proxy to the staging environment
+				AuthenticationServerURL: "https://headlightstg.paviasystems.com/1.0/",
 				// Pass through the POST authentication API
 				AuthTypes: ['POST'],
 
@@ -54,7 +54,7 @@ var HeadlightApp = function()
 				SessionStrategy: "InMemory",
 
 				// Use what most Headlight docker instances use for memcache
-				MemcachedURL: "192.168.99.100:11211",
+				MemcachedURL: "127.0.0.1:11211",
 
 				// Load a config file if it is available
 				ConfigFile: __dirname+'/../../../headlight-app/server/HeadlightApp-Orator.json'
