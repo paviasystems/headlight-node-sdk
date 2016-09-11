@@ -30,7 +30,11 @@ var HeadlightApp = function()
 				// Defaults to the version of the SDK, but this should be overridden
 				ProductVersion: require(__dirname+'/../package.json').version,
 
+<<<<<<< HEAD
 				// By default, Apps authenticate and proxy to the staging environment
+=======
+				// By default, Apps authenticate and proxy to the QA environment
+>>>>>>> 4d6b0c2d49863dc43219b2f2428217347ceafad1
 				AuthenticationServerURL: "https://headlightstg.paviasystems.com/1.0/",
 				// Pass through the POST authentication API
 				AuthTypes: ['POST'],
