@@ -138,7 +138,9 @@ var HeadlightApp = function()
 			tmpSettings.Assets.Source = pSourceFolder;
 			// Site agglomeration
 			tmpSettings.Site.Source = pSourceFolder+'html/**/*.*';
-			tmpSettings.Site.Head = pSourceFolder+'html/index-head.html';
+			tmpSettings.Site.Head = tmpSettings.AppCustomizations.Page["Index-Head-Override"] ? 
+										pSourceFolder+'../../headlight-app/'+tmpSettings.AppCustomizations.Page["Index-Head-Override"] : 
+										pSourceFolder+'html/index-head.html';
 			tmpSettings.Site.Partials = (
 				[
 					pSourceFolder+'html/templates/**/*.html',
@@ -147,7 +149,9 @@ var HeadlightApp = function()
 					pSourceFolder+'html/pict/**/*.html',
 					pSourceFolder+'html/recordsets/**/*.html'
 				]);
-			tmpSettings.Site.Tail = pSourceFolder+'html/index-tail.html';
+			tmpSettings.Site.Tail = tmpSettings.AppCustomizations.Page["Index-Tail-Override"] ? 
+										pSourceFolder+'../../headlight-app/'+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
+										pSourceFolder+'html/index-tail.html';
 			tmpSettings.Site.Scripts = pSourceFolder+'scripts/**/*.js';
 		};
 
@@ -188,6 +192,16 @@ var HeadlightApp = function()
 			if (_Swill) return _Swill;
 			// If the swill object has already been created, return it.
 			_Swill = require('swill');
+			
+			// Load the Headlight-App.json and stuff it in the settings object.
+			try
+			{
+				_Swill.settings.AppCustomizations = require(__dirname+'/../../../headlight-app/Headlight-App.json');
+			}
+			catch (pError)
+			{
+				_Swill.settings.AppCustomizations = {Page:{}};
+			}
 
 			_Swill.settings.CSS.Less = true;
 			_Swill.settings.CSS.Sass = true;
