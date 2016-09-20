@@ -140,7 +140,7 @@ var HeadlightApp = function()
 			// Site agglomeration
 			tmpSettings.Site.Source = pSourceFolder+'html/**/*.*';
 			tmpSettings.Site.Head = tmpSettings.AppCustomizations.Page["Index-Head-Override"] ? 
-										pSourceFolder+'../../headlight-app/'+tmpSettings.AppCustomizations.Page["Index-Head-Override"] : 
+										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Head-Override"] : 
 										pSourceFolder+'html/index-head.html';
 			tmpSettings.Site.Partials = (
 				[
@@ -151,7 +151,7 @@ var HeadlightApp = function()
 					pSourceFolder+'html/recordsets/**/*.html'
 				]);
 			tmpSettings.Site.Tail = tmpSettings.AppCustomizations.Page["Index-Tail-Override"] ? 
-										pSourceFolder+'../../headlight-app/'+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
+										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
 										pSourceFolder+'html/index-tail.html';
 			tmpSettings.Site.Scripts = pSourceFolder+'scripts/**/*.js';
 		};
@@ -182,7 +182,7 @@ var HeadlightApp = function()
 			// Compile from the entrypoint source/Main.js
 			_Swill.settings.Compilation.EntryPoint = pDestinationFolder+'/../source/Main.js';
 			// Output to the "headlight-app/Headlight-App-Script.js"
-			tmpSettings.Compilation.Destination = pDestinationFolder+'/../headlight-app/';
+			tmpSettings.Compilation.Destination = _Swill.settings.HeadlightAppFolder;
 			tmpSettings.Compilation.DestinationScript = 'Headlight-App-Script.js';
 
 		};
@@ -197,7 +197,7 @@ var HeadlightApp = function()
 			// Load the Headlight-App.json and stuff it in the settings object.
 			try
 			{
-				_Swill.settings.AppCustomizations = require(__dirname+'/../../../headlight-app/Headlight-App.json');
+				_Swill.settings.AppCustomizations = require(_Swill.settings.HeadlightAppFolder+'Headlight-App.json');
 			}
 			catch (pError)
 			{
@@ -238,8 +238,8 @@ var HeadlightApp = function()
 			_Swill.addAssetCopy({Input:'assets/images/**/*.*', Output:'images/'});
 			_Swill.addAssetCopy({Input:'assets/fonts/**/*.*', Output:'fonts/'});
 			// Assets from the app itself
-			_Swill.addAssetCopy({Input:'../../headlight-app/images/**/*.*', Output:'headlight-app/'});
-			_Swill.addAssetCopy({Input:'../../headlight-app/css/Headlight-App.css', Output:'headlight-app/'});
+			_Swill.addAssetCopy({Input:_Swill.settings.HeadlightAppFolder+'images/**/*.*', Output:'headlight-app/'});
+			_Swill.addAssetCopy({Input:_Swill.settings.HeadlightAppFolder+'css/Headlight-App.css', Output:'headlight-app/'});
 
 			// The login page
 			_Swill.addAssetCopy({Input:'html/login.html', Output:''});
