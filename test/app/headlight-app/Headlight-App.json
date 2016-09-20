@@ -1,0 +1,20 @@
+{
+  "AppHash": "AppendorExample",
+  "AppName": "Text Appendor",
+  "AppAuthor": "steven.velozo@paviasystems.com",
+  
+  "AppRecordHash": "AppendedText",
+  "AppRecordName": "Appended",
+  "AppRecordNamePlural": "Appendeds",
+
+  "ProjectList": true,
+  "Backbone": true,
+
+  "Page":
+    {
+      "Index-Head-Override": false,
+      "Index-Tail-Override": false,
+      
+      "AppEntryTemplate": "AppendorExample_Main"
+    }
+}

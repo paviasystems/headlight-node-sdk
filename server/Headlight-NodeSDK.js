@@ -59,8 +59,9 @@ var HeadlightApp = function()
 				// Load a config file if it is available
 				ConfigFile: __dirname+'/../../../headlight-app/server/HeadlightApp-Orator.json'
 			});
+		var _SettingsPassed = (typeof(pSettings) === 'object') ? pSettings : {};
 		// Map in the passed-in settings and default settings
-		var _Settings = libUnderscore.extend({}, _SettingsDefaults, (typeof(pSettings) === 'object') ? pSettings : {});
+		var _Settings = JSON.parse(JSON.stringify(libUnderscore.extend({}, _SettingsDefaults, _SettingsPassed)));
 
 		var getAppPage = function(pRequest, pResponse, fNext)
 		{
@@ -74,7 +75,7 @@ var HeadlightApp = function()
 			var tmpServe = libRestify.serveStatic
 			(
 				{
-					directory: _SettingsDefaults.StaticContentFolder,
+					directory: _Orator.settings.StaticContentFolder,
 					default: tmpFile
 				}
 			);
@@ -102,7 +103,7 @@ var HeadlightApp = function()
 			_Orator.webServer.get('/', getAppPage);
 
 			// Map the staged web site to a static server on all other root requests
-			_Orator.addStaticRoute(_SettingsDefaults.StaticContentFolder);
+			_Orator.addStaticRoute(_Orator.settings.StaticContentFolder);
 
 			// Start the web server
 			//libOrator.startWebServer();
@@ -191,7 +192,7 @@ var HeadlightApp = function()
 		{
 			if (_Swill) return _Swill;
 			// If the swill object has already been created, return it.
-			_Swill = require('swill');
+			_Swill = require('swill').new(JSON.parse(JSON.stringify(libUnderscore.extend({}, _SettingsDefaults, _SettingsPassed))));
 			
 			// Load the Headlight-App.json and stuff it in the settings object.
 			try
@@ -291,7 +292,7 @@ var HeadlightApp = function()
 					// set up the custom browserify instance for this task
 					var tmpBrowserify = libBrowserify(
 					{
-						entries: _Swill.settings.Build.Source+'../../headlight-app/scripts/Headlight-App.js'
+						entries: _Swill.settings.HeadlightAppFolder+'/scripts/Headlight-App.js'
 					});
 			
 					return tmpBrowserify.bundle()
@@ -304,7 +305,7 @@ var HeadlightApp = function()
 			
 			// ### TASK: compile all SASS files in the app
 			gulp.task('app-sass', function(){
-				var paths = [_Swill.settings.Build.Source+'../../headlight-app/css/**/Headlight-App.scss'];
+				var paths = [_Swill.settings.HeadlightAppFolder+'/css/**/Headlight-App.scss'];
 			    return gulp.src(paths)
 			        .pipe(require('gulp-sass')({
 			            style: 'compressed',
