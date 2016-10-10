@@ -34,7 +34,19 @@ var HeadlightApp = function()
 				AuthenticationServerURL: "https://headlightstg.paviasystems.com/1.0/",
 				// Pass through the POST authentication API
 				AuthTypes: ['POST'],
-
+				
+				"LogStreams":
+		        [
+		            {
+		                "level": "trace",
+		                "path": `${__dirname}/../../../Run.log`
+		            },
+		            {
+		                "level": "trace",
+		                "streamtype": "prettystream"
+		            }
+		        ],
+		
 				// The folder to serve static web files from for this app.
 				// By default, use the Stage folder in the INCLUDING module.
 				// This expects "mymodule/node_modules/headlight-nodesk/server"
