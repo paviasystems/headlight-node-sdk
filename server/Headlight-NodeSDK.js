@@ -96,7 +96,7 @@ var HeadlightApp = function()
 
 
 		var _Orator = false;
-		var orator = function()
+		var orator = function(fCustomRouteHandler)
 		{
 			// If the web server is already initialized, return it.
 			if (_Orator) return _Orator;
@@ -113,6 +113,10 @@ var HeadlightApp = function()
 			// Add branching on index.html to load login.html if we have no session
 			_Orator.webServer.get('index.html', getAppPage);
 			_Orator.webServer.get('/', getAppPage);
+
+			//Allow the consumer to connect any additional routes before the final
+			// static route handler is added.
+			fCustomRouteHandler(_Orator);
 
 			// Map the staged web site to a static server on all other root requests
 			_Orator.addStaticRoute(_Orator.settings.StaticContentFolder);
