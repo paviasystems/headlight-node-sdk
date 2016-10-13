@@ -116,7 +116,8 @@ var HeadlightApp = function()
 
 			//Allow the consumer to connect any additional routes before the final
 			// static route handler is added.
-			fCustomRouteHandler(_Orator);
+			if (fCustomRouteHandler)
+				fCustomRouteHandler(_Orator);
 
 			// Map the staged web site to a static server on all other root requests
 			_Orator.addStaticRoute(_Orator.settings.StaticContentFolder);
