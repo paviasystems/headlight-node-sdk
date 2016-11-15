@@ -151,17 +151,33 @@ var HeadlightApp = function()
 			tmpSettings.Assets.Source = pSourceFolder;
 			// Site agglomeration
 			tmpSettings.Site.Source = pSourceFolder+'html/**/*.*';
+			
 			tmpSettings.Site.Head = tmpSettings.AppCustomizations.Page["Index-Head-Override"] ? 
 										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Head-Override"] : 
+									tmpSettings.AppCustomizations.Page["Site-Simple"] ?
+										pSourceFolder+'html/index-head-simple.html' :
 										pSourceFolder+'html/index-head.html';
-			tmpSettings.Site.Partials = (
-				[
-					pSourceFolder+'html/templates/**/*.html',
-					pSourceFolder+'headlight-app-backbone/partials/**/*.html',
-					pSourceFolder+'html/static/**/*.html',
-					pSourceFolder+'html/pict/**/*.html',
-					pSourceFolder+'html/recordsets/**/*.html'
-				]);
+			if (tmpSettings.AppCustomizations.Page["Site-Simple"])
+			{
+				tmpSettings.Site.Partials = (
+					[
+						pSourceFolder+'html/templates/**/*.html',
+						pSourceFolder+'html/static/**/*.html',
+						pSourceFolder+'html/pict/**/*.html',
+						pSourceFolder+'html/recordsets/**/*.html'
+					]);
+			}
+			else
+			{
+				tmpSettings.Site.Partials = (
+					[
+						pSourceFolder+'html/templates/**/*.html',
+						pSourceFolder+'headlight-app-backbone/partials/**/*.html',
+						pSourceFolder+'html/static/**/*.html',
+						pSourceFolder+'html/pict/**/*.html',
+						pSourceFolder+'html/recordsets/**/*.html'
+					]);
+			}
 			tmpSettings.Site.Tail = tmpSettings.AppCustomizations.Page["Index-Tail-Override"] ? 
 										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
 										pSourceFolder+'html/index-tail.html';

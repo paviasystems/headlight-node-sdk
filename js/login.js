@@ -2,6 +2,7 @@
  * Headlight App Login
  * @license Pavia Systems Closed Source License
  */
+/* global $ */
 
 // Show the background image and login modal
 $('.login-bg').show();
@@ -87,7 +88,7 @@ $('#loginForm').submit
 					}
 					else
 					{
-						location.reload();
+						window.location.reload();
 					}
 				}
 				else

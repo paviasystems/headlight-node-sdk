@@ -30,7 +30,7 @@
     "gulp-util": "^3.0.7",
     "orator": "^1.0.18",
     "orator-session-remoteauth": "^1.0.4",
-    "rock": "^0.3.1",
+    "rock": "^0.4.0",
     "swill": "^1.0.7",
     "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
