@@ -5,6 +5,7 @@
 */
 var libUnderscore = require('underscore');
 var libRestify = require('restify');
+var libFS = require('fs');
 
 /**
 * Main Headlight Node SDK APP
@@ -159,30 +160,30 @@ var HeadlightApp = function()
 			
 			tmpSettings.Site.Head = tmpSettings.AppCustomizations.Page["Index-Head-Override"] ? 
 										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Head-Override"] : 
-									tmpSettings.AppCustomizations.Page["Site-Simple"] ?
-										pSourceFolder+'html/index-head-simple.html' :
+									tmpSettings.AppCustomizations.Page["Site-Type"] ?
+										pSourceFolder+'html/index-head-'+tmpSettings.AppCustomizations.Page["Site-Type"]+'.html' :
 										pSourceFolder+'html/index-head.html';
-			if (tmpSettings.AppCustomizations.Page["Site-Simple"])
-			{
-				tmpSettings.Site.Partials = (
-					[
-						pSourceFolder+'html/templates/**/*.html',
-						pSourceFolder+'html/static/**/*.html',
-						pSourceFolder+'html/pict/**/*.html',
-						pSourceFolder+'html/recordsets/**/*.html'
-					]);
-			}
-			else
-			{
-				tmpSettings.Site.Partials = (
-					[
-						pSourceFolder+'html/templates/**/*.html',
-						pSourceFolder+'headlight-app-backbone/partials/**/*.html',
-						pSourceFolder+'html/static/**/*.html',
-						pSourceFolder+'html/pict/**/*.html',
-						pSourceFolder+'html/recordsets/**/*.html'
-					]);
-			}
+
+			var tmpBuiltInPartials = pSourceFolder+'headlight-app-backbone/partials/**/*.html';
+			if (tmpSettings.AppCustomizations.Page["Site-Type"])
+				tmpBuiltInPartials = pSourceFolder+'headlight-app-'+tmpSettings.AppCustomizations.Page["Site-Type"]+'/partials/**/*.html'
+
+			// TODO: Go over these folders, many are unnecessary.
+			tmpSettings.Site.Partials = (
+				[
+					tmpBuiltInPartials,
+					pSourceFolder+'html/templates/**/*.html',
+					pSourceFolder+'html/static/**/*.html',
+					pSourceFolder+'html/pict/**/*.html',
+					pSourceFolder+'html/recordsets/**/*.html'
+				]);
+
+			tmpSettings.Site.Tail = tmpSettings.AppCustomizations.Page["Index-Tail-Override"] ? 
+										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
+									tmpSettings.AppCustomizations.Page["Site-Type"] ?
+										pSourceFolder+'html/index-tail-'+tmpSettings.AppCustomizations.Page["Site-Type"]+'.html' :
+										pSourceFolder+'html/index-tail.html';
+
 			tmpSettings.Site.Tail = tmpSettings.AppCustomizations.Page["Index-Tail-Override"] ? 
 										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
 										pSourceFolder+'html/index-tail.html';
@@ -318,6 +319,38 @@ var HeadlightApp = function()
 						        .pipe(gulp.dest(_Swill.settings.Site.Destination+'js/'));
 			});
 			
+			// ### TASK: Build the custom application type script
+			gulp.task('sdk-app-type-build', ()=>
+			{
+				if (!_Swill.settings.AppCustomizations.Page["Site-Type"])
+					return;
+
+				var tmpScript = 'headlight-sdk-'+_Swill.settings.AppCustomizations.Page["Site-Type"]+'.js';
+				var tmpScriptPath = _Swill.settings.Build.Source+'js/'+_Swill.settings.AppCustomizations.Page["Site-Type"]+'/'+tmpScript;
+
+				libFS.stat(tmpScriptPath, (pError, pFileStats) =>
+				{
+					if (pError)
+					{
+						if (pError.code === 'ENOENT')
+							return console.log('--> Problem building app type script.  The script file '+tmpScript+' in '+tmpScriptPath+' is missing.');
+
+						return console.log('--> Problem building app type script.  Error accessing script file '+tmpScript+' in '+tmpScriptPath+': '+pError);
+					}
+
+					var tmpBrowserify = libBrowserify(
+					{
+						entries: tmpScriptPath
+					});
+			
+					return tmpBrowserify.bundle()
+						.pipe(libVinylSourceStream(tmpScript))
+						.pipe(libVinylBuffer())
+								.on('error', libGulpUtil.log)
+						.pipe(_Swill.gulp.dest(_Swill.settings.Site.Destination+'headlight-app/'));
+				});
+			});
+			
 			// ### TASK: compile all script files in the app using Browserify
 			gulp.task('app-script-debug',
 				function ()
@@ -348,10 +381,10 @@ var HeadlightApp = function()
 			});
 		
 			// ### TASK: Build and stage the full application
-			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'app-script-debug', 'app-sass']);
+			gulp.task('build', ['less', 'sass', 'site-copy', 'asset-copy', 'dependencies', 'sdk-scripts-concat', 'sdk-app-type-build', 'app-script-debug', 'app-sass']);
 		
 			// ### TASK: Build and stage the full application for debug
-			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'app-script-debug', 'app-sass']);
+			gulp.task('build-debug', ['less-debug', 'sass-debug', 'site-copy-debug', 'asset-copy', 'dependencies-debug', 'sdk-scripts-concat', 'sdk-app-type-build', 'app-script-debug', 'app-sass']);
 
 			return _Swill;
 		};
