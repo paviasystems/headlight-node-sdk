@@ -166,7 +166,7 @@ var HeadlightApp = function()
 
 			var tmpBuiltInPartials = pSourceFolder+'headlight-app-backbone/partials/**/*.html';
 			if (tmpSettings.AppCustomizations.Page["Site-Type"])
-				tmpBuiltInPartials = pSourceFolder+'headlight-app-'+tmpSettings.AppCustomizations.Page["Site-Type"]+'/partials/**/*.html'
+				tmpBuiltInPartials = pSourceFolder+'headlight-app-'+tmpSettings.AppCustomizations.Page["Site-Type"]+'/partials/**/*.html';
 
 			// TODO: Go over these folders, many are unnecessary.
 			tmpSettings.Site.Partials = (
@@ -212,7 +212,7 @@ var HeadlightApp = function()
 			tmpSettings.Site.Destination = pDestinationFolder;
 
 			// Compilation of J
-			var libPath = require('path');
+			// var libPath = require('path');
 			// Compile from the entrypoint source/Main.js
 			_Swill.settings.Compilation.EntryPoint = pDestinationFolder+'/../source/Main.js';
 			// Output to the "headlight-app/Headlight-App-Script.js"
@@ -271,9 +271,16 @@ var HeadlightApp = function()
 			// Images and other graphical assets
 			_Swill.addAssetCopy({Input:'assets/images/**/*.*', Output:'images/'});
 			_Swill.addAssetCopy({Input:'assets/fonts/**/*.*', Output:'fonts/'});
-			// Assets from the app itself
-			_Swill.addAssetCopy({Input:_Swill.settings.HeadlightAppFolder+'images/**/*.*', Output:'headlight-app/'});
-			_Swill.addAssetCopy({Input:_Swill.settings.HeadlightAppFolder+'css/Headlight-App.css', Output:'headlight-app/'});
+
+			// Assets from the app itself.  This is tricky.
+			var tmpSourceFolder = libPath.resolve(_Swill.settings.Build.Source);
+			var tmpAppFolder = libPath.resolve(_Swill.settings.HeadlightAppFolder);
+			var tmpRelativePath = libPath.relative(tmpSourceFolder, tmpAppFolder);
+			_Swill.addAssetCopy({Input:tmpRelativePath+'/scripts/**/*.*', Output:'headlight-app/scripts/'});
+			_Swill.addAssetCopy({Input:tmpRelativePath+'/assets/**/*.*', Output:'headlight-app/assets/'});
+			_Swill.addAssetCopy({Input:tmpRelativePath+'/images/**/*.*', Output:'headlight-app/images/'});
+			_Swill.addAssetCopy({Input:tmpRelativePath+'/css/**/*.*', Output:'headlight-app/css/'});
+			//_Swill.addAssetCopy({Input:_Swill.settings.HeadlightAppFolder+'css/Headlight-App.css', Output:'headlight-app/'});
 
 			// The login page
 			_Swill.addAssetCopy({Input:'html/login.html', Output:''});
@@ -298,8 +305,8 @@ var HeadlightApp = function()
 			var libVinylSourceStream = require('vinyl-source-stream');
 			var libVinylBuffer = require('vinyl-buffer');
 			
-			var libUglify = require('gulp-uglify');
-			var libSourcemaps = require('gulp-sourcemaps');
+//			var libUglify = require('gulp-uglify');
+//			var libSourcemaps = require('gulp-sourcemaps');
 			var libGulpUtil = require('gulp-util');
 			
 			var gulp = _Swill.gulp;
