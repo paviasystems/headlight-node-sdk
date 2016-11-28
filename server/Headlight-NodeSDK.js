@@ -228,6 +228,8 @@ var HeadlightApp = function()
 			// If the swill object has already been created, return it.
 			_Swill = require('swill').new(JSON.parse(JSON.stringify(libUnderscore.extend({}, _SettingsDefaults, _SettingsPassed))));
 			
+			var libPath = require('path');
+
 			// Load the Headlight-App.json and stuff it in the settings object.
 			try
 			{
@@ -295,7 +297,6 @@ var HeadlightApp = function()
 
 			_Swill.settings.Site.Partials.push(_Settings.HeadlightAppFolder+'**/*.html');
 
-			var libPath = require('path');
 			_Swill.addAssetCopy({Input:libPath.relative(_Settings.SwillRoot,_Settings.HeadlightAppFolder)+'**/*.*', Output:''});
 			
 			_Swill.addAssetCopy({ Input: 'assets/fonts/**/*.*', Output: 'fonts/'});
