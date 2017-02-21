@@ -67,7 +67,7 @@ var HeadlightApp = function()
 				SessionStrategy: "InMemory",
 
 				// Use what most Headlight docker instances use for memcache
-				MemcachedURL: "127.0.0.1:11211",
+				MemcachedURL: "headlight-memcached.headlight:11211",
 
 				// Load a config file if it is available
 				ConfigFile: __dirname+'/../../../headlight-app/server/HeadlightApp-Orator.json'
