@@ -1,6 +1,6 @@
 {
   "name": "headlight-node-sdk",
-  "version": "2.1.35",
+  "version": "2.1.36",
   "description": "Headlight - App Store Foundation SDK",
   "main": "server/Headlight-NodeSDK.js",
   "scripts": {
