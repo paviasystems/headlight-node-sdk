@@ -1,11 +1,27 @@
 .view-records {
     .actions {
         padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .record-select {
+        margin: 5px;
+    }
+    .fa-circle.complete {
+        color: #337ab7;
+        border-color: #2e6da4;
+    }
+
+    .fa-circle.incomplete {
+        color: #d9534f;
+        border-color: #d43f3a;
     }
     
     .table-striped {
         border: 1px solid #ddd;
     }
+
+    
     
     .empty {
         .icon {
@@ -26,4 +42,22 @@
         text-align: center;
     }
 
+}
+
+.comparison-label {
+    text-align: right;
+    font-weight: bold;
+    font-weight: bold;
+}
+
+.comparison-data {
+    font-size: 1em;
+}
+
+.table-comparison td{
+    font-size: .9em;
+}
+ .table-comparison th{
+    font-size: .9em;
+    font-weight: bold;
 }

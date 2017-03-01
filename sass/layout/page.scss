@@ -19,3 +19,15 @@ a {
     border-radius: 4px;
     box-shadow: #D8D8D8 0px 2px;
 }
+
+@media (min-width: 1100px) {
+    .modal-extra-lg {
+        width: 1100px; 
+    } 
+}
+
+@media (min-width: 1300px) {
+    .modal-extra-lg {
+        width: 1300px; 
+    } 
+}
