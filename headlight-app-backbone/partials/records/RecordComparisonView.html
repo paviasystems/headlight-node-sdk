@@ -1,0 +1,32 @@
+<script type="text/template" id="record-comparison-tmpl">
+<div class="panel panel-default">
+    <div class="panel-heading"><%= Details.SimulationName %></div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-7 comparison-label">Route:</div><div class="col-md-5 comparison-data"> <%= Details.Route %></div>
+                <div class="col-md-7 comparison-label">Work Length:</div><div class="col-md-5 comparison-data"> <%= Details.Units == 'metric' ? Details.WorkLength/1000 : ((Details.WorkLength/1000)*0.621371).toFixed(2) %> <%= Details.Units == 'metric'?'km':'miles' %></div>
+                <div class="col-md-7 comparison-label">Total Closures:</div><div class="col-md-5 comparison-data"> <%= Details.RequiredWindows %></div>
+                <div class="col-md-7 comparison-label">Total Hours Per Closure:</div><div class="col-md-5 comparison-data"><%= Details.WorkingWindow %></div>
+                <div class="col-md-7 comparison-label">Eff. Hours Per Closure:</div><div class="col-md-5 comparison-data"><%= Details.ActualWorkingWindow %></div>
+                <div class="col-md-7 comparison-label">Total Hours:</div><div class="col-md-5 comparison-data"> <%= (Details.RequiredWindows * Details.WorkingWindow).toFixed(2) %></div>
+                <div class="col-md-7 comparison-label">Progress Per Closure (linear):</div><div class="col-md-5 comparison-data"> <%= Details.Units == 'metric' ? Details.ProgressPerDay : (Details.ProgressPerDay*3.28084).toFixed(2) %> <%= Details.Units == 'metric'?'meters':'feet' %></div>
+                <div class="col-md-7 comparison-label">Progress Per Closure (lane-<%= Details.Units == 'metric'?'km':'miles' %>):</div><div class="col-md-5 comparison-data"> <%=  Details.Units == 'metric' ? Details.ProgressPerDay/1000 * Details.LaneCount : ((Details.ProgressPerDay/1000) *3.28084 * Details.LaneCount).toFixed(2) %> </div>
+                <div class="col-md-7 comparison-label">Pavement Type:</div><div class="col-md-5 comparison-data"> <%= Details.PavementType %></div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-7 comparison-label">Concurrent Construction:</div><div class="col-md-5 comparison-data"> <%= Details.SequenceMethod=="Serial"?'No':'Yes' %></div>
+                <div class="col-md-7 comparison-label">Shift Operation:</div><div class="col-md-5 comparison-data"> <%= (Details.ShiftClosure==='true') ?'Yes':'No' %></div>
+                <div class="col-md-7 comparison-label">Lane Profile:</div><div class="col-md-5 comparison-data"> <%= Details.LaneCount %>x<%= Details.Units == 'metric' ? Details.LaneWidth : (Details.LaneWidth * 3.28084).toFixed(2) %> <%= Details.Units == 'metric'?'meters':'feet' %></div>
+                <div class="col-md-7 comparison-label">Lifts:</div><div class="col-md-5 comparison-data"> <%= Details.Lifts %></div>
+                <div class="col-md-7 comparison-label">Asphalt Thickness:</div><div class="col-md-5 comparison-data"> <%= Details.Units == 'metric' ? Details.AsphaltThickness : (Details.AsphaltThickness * 3.28084).toFixed(2) %> <%= Details.Units == 'metric'?'meters':'feet' %></div>
+                <div class="col-md-7 comparison-label">Base Thickness:</div><div class="col-md-5 comparison-data"> <%= Details.Units == 'metric' ? Details.BaseThickness : (Details.BaseThickness * 3.28084).toFixed(2) %> <%= Details.Units == 'metric'?'meters':'feet' %></div>
+                <div class="col-md-7 comparison-label">Volume Removed:</div><div class="col-md-5 comparison-data"> <%= Details.Units == 'metric' ? (Details.DemolitionThickness * Details.ProgressPerDay).toFixed(2) : (Details.DemolitionThickness * 3.28084 * Details.ProgressPerDay).toFixed(2) %> <%= Details.Units == 'metric'?'cubic meters':'cubic feet' %></div>
+                <div class="col-md-7 comparison-label">Mass Removed:</div><div class="col-md-5 comparison-data"> <%= Details.Units == 'metric'?  (2.06 * Details.DemolitionThickness * Details.ProgressPerDay).toFixed(2) :(55.35 * Details.DemolitionThickness * Details.ProgressPerDay).toFixed(2) %> <%= Details.Units == 'metric'?'tons':'tonnes' %></div>
+                <div class="col-md-7 comparison-label">Units:</div><div class="col-md-5 comparison-data"> <%= Details.Units %></div>
+                <div class="col-md-7 comparison-label">Date Created:</div><div class="col-md-5 comparison-data"> <%= Details.Created %></div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>

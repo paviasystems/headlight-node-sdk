@@ -1,11 +1,37 @@
 <script type="text/template" id="record-list-tmpl">
+
+    <div class="modal fade" id="compare_reports" tabindex="-1" role="dialog" aria-labelledby="compare reports">
+        <div class="modal-dialog modal-extra-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="probablistic_modal_label">Comparison Tool</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="view-records">
-    
         <div class="row">
             <div class="col-md-10">
                 <h1><%= HeadlightAppData.AppRecordNamePlural %><%= project.Name ? ': ' + project.Name : '' %></h1>
             </div>
-            <div class="col-md-2 text-right actions">
+        </div>
+        <div class="row">
+            <div class="col-md-2 actions">
+                <a href="#" class="btn btn-success compare-selected"><i class="fa fa-plus"></i> Compare Selected</a>
+            </div>
+            <div class="col-md-2 actions">
+                <a href="#" class="btn btn-success duplicate-selected"><i class="fa fa-plus"></i> Duplicate Selected</a>
+            </div>
+            <div class="col-md-2 actions">
+                <a href="#" class="btn btn-success delete-selected"><i class="fa fa-plus"></i> Delete Selected</a>
+            </div>
+            <div class="col-md-3 text-right actions">
                 <a href="<%= url((HeadlightAppData.ProjectList ? '/projects/' + project.IDProject : '') + '/records/new') %>" class="btn btn-success add-record"><i class="fa fa-plus"></i> New <%= HeadlightAppData.AppRecordName %></a>
             </div>
         </div>
@@ -14,7 +40,16 @@
         
             <% if(records.length > 0){ %>
                 <table class="table table-striped table-hover">
-                    <thead></thead>
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Simulation Name</th>
+                            <th>Paving Method</th>
+                            <th>Last Modified</th>
+                            <th>Status</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                    </thead>
                     <tbody class="list"></tbody>
                 </table>
             <% } else { %>
