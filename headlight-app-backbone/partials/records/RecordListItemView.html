@@ -1,6 +1,68 @@
 <script type="text/template" id="record-item-tmpl">
+    <td>
+        <input type="checkbox" 
+        class="record-select" 
+        data-record-id="<%= record.IDAppData %>" 
+        data-complete="<%= CurrentState ? true:false %>"
+        <% if(CurrentState){ 
+            var lifts = CurrentState.Phases.map(function(phase) {
+                if(phase) { return phase.LiftData; }
+            }).filter(function(phase){
+                return phase;
+            }).shift();
+            var liftCount = lifts ? lifts.LiftThicknesses.filter(function(lift) { return lift; }).length: 0;
+        %>
+        data-pavement-type="<%= CurrentState.PavementType %>"
+        data-working-window="<%= CurrentState.WorkingWindow?CurrentState.WorkingWindow.toFixed(2):0 %>"
+        data-actual-window="<%= CurrentState.ActualWorkingWindow?CurrentState.ActualWorkingWindow.toFixed(2):0 %>"
+        data-simulation-name="<%= record.Title ? record.Title : (HeadlightAppData.AppRecordName + ' ' + record.IDAppData) %>"
+        data-progress-per-day="<%= CurrentState.ProgressPerDay?CurrentState.ProgressPerDay.toFixed(2):0 %>"
+        data-required-windows="<%= CurrentState.RequiredWindows?CurrentState.RequiredWindows.toFixed(2):0 %>"
+        data-work-length="<%= CurrentState.LaneLength.toFixed(2) %>"
+        data-units="<%= CurrentState.ProjectUnits %>"
+        data-sequence-method="<%= CurrentState.SequenceMethod %>"
+        data-shift-closure="<%= CurrentState.ShiftClosure?true:false %>"
+        data-route="<%= CurrentState.Route %>"
+        data-lane-count="<%= CurrentState.LaneCount %>"
+        data-lane-width="<%= CurrentState.LaneWidth?CurrentState.LaneWidth.toFixed(2):0 %>"
+        data-created="<%= record.UpdateDate.split('T')[0] %>"
+        data-base-thickness="<%= CurrentState.TreatedBaseThickness?CurrentState.TreatedBaseThickness.toFixed(2):0 %>"
+        data-asphalt-thickness="<%= CurrentState.AsphaltThickness?CurrentState.AsphaltThickness.toFixed(2):0 %>"
+        data-demolition-thickness="<%= CurrentState.DemolitionThickness?CurrentState.DemolitionThickness.toFixed(2):0 %>"
+        data-lifts="<%= liftCount %>"
+        data-limiting-factors="<%= CurrentState.InternalSlopes.map(function(state){ return state.name }).slice(0,3).join('<br>') %>"
+        data-closure-type="<%= 
+        CurrentState.Phases.map(function(phase) { 
+                if(phase && phase.LiftData) { return phase.LiftData.ClosureType } 
+                return false; 
+            }).filter(function(closure) { 
+                return closure; 
+            })  %>"
+        data-cooling-time="<%= 
+        CurrentState.Phases.map(function(phase) { 
+                if(phase && phase.Name == 'Curing') { return phase.HoursPerDay } 
+                if(phase && phase.LiftData) { 
+                    return phase.LiftData.CoolingTimes.filter(function(time) {
+                        return time;
+                    }).reduce(function(acc, value) {
+                        return acc + value;
+                    })/phase.LiftData.CoolingTimes.filter(function(time) {
+                        return time;
+                    }).length;
+                } 
+                return false; 
+            }).filter(function(closure) { 
+                return closure; 
+            })  %>"
+        <% } %>
+        >
+    </td>
     <td><a href="<%= url((record.IDProject ? '/projects/' + record.IDProject : '') + '/records/' + record.IDAppData) %>"><%= record.Title ? record.Title : (HeadlightAppData.AppRecordName + ' ' + record.IDAppData) %></a></td>
+    <td><%= CurrentState ? CurrentState.PavementType : "Unspecified" %></td>
+    <td><%= record.UpdateDate.split('T')[0] %></td>
+    <td><%= CurrentState? '<i class="fa fa-circle complete"></i> Complete': '<i class="fa fa-circle incomplete"></i> Incomplete' %></td>
     <td class="text-right">
+        <a href="<%= url((record.IDProject ? '/projects/' + record.IDProject : '') + '/records/' + record.IDAppData) %>" class="btn btn-default edit" title="Edit record"><i class="fa fa-cogs"></i></a>
         <a href="<%= url((record.IDProject ? '/projects/' + record.IDProject : '') + '/records/' + record.IDAppData) %>" class="btn btn-default edit" title="Edit record"><i class="fa fa-wrench"></i></a>
         <button type="button" class="btn btn-default delete"><i class="fa fa-trash"></i></button>
     </td>
