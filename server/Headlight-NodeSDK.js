@@ -80,7 +80,8 @@ var HeadlightApp = function()
 		{
 			var tmpFile = 'login.html';
 
-			if (pRequest.UserSession.LoggedIn)
+			if (pRequest.UserSession.LoggedIn ||
+				_Settings.RequireAppPageLogin === false)
 				tmpFile = 'index.html';
 
 			_Orator.fable.log.fatal('Sending '+tmpFile);
