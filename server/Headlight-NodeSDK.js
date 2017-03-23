@@ -80,8 +80,7 @@ var HeadlightApp = function()
 		{
 			var tmpFile = 'login.html';
 
-			if (pRequest.UserSession.LoggedIn ||
-				_Settings.RequireAppPageLogin === false)
+			if (pRequest.UserSession.LoggedIn || _Settings.RequireAppPageLogin === false)
 				tmpFile = 'index.html';
 
 			_Orator.fable.log.fatal('Sending '+tmpFile);
@@ -189,6 +188,7 @@ var HeadlightApp = function()
 										_Swill.settings.HeadlightAppFolder+tmpSettings.AppCustomizations.Page["Index-Tail-Override"] : 
 										pSourceFolder+'html/index-tail.html';
 			tmpSettings.Site.Scripts = pSourceFolder+'scripts/**/*.js';
+
 		};
 
 

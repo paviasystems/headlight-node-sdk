@@ -64,7 +64,21 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     
     this.initialize = function(){
         bootstrap();
-        checkSessionStatus();
+        HeadlightApp.initializeModule(false, function() {
+            // Write the page form content
+            if(headlightAppData.Offline) {
+                $('#appNavigationContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Navigation').text()));
+                $('#appContentContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Form').text()));
+                $('#appFooterContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Footer').text()));
+            }
+            else {
+                checkSessionStatus();
+            }
+            
+        });
+        // Now load the module
+        // HeadlightApp.initializeModule();
+        // checkSessionStatus();
     };
     
     this.start = function(appData){
@@ -168,7 +182,7 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     };
     
     
-    this.initializeModule = function(pModuleName)
+    this.initializeModule = function(pModuleName, callback)
     {
     	var tmpModuleName = (typeof(pModuleName) === 'undefined') ? false : pModuleName;
     
@@ -190,10 +204,19 @@ var HeadlightApp = pict.features.HeadlightApp = (function(){
     	(
     		function (pData)
     		{
+                if (typeof(pData) === 'string') {
+                    try {
+                        pData = JSON.parse(pData);
+                    }
+                    catch(e) {
+                        console.log("error parsing", e)
+                    }
+                }
     			if (typeof(pData) === 'object')
     			{
     			    headlightAppData = pData;
     				tmpModuleName = pData.AppHash;
+                    callback();
     				// Load the module (maybe wrap this in try catch eventually)
     				if(!pict.features[tmpModuleName]){
     				    console.log('ERROR: Could not find pict module with name: ' + tmpModuleName);

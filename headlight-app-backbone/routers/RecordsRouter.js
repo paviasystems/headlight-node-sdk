@@ -28,7 +28,6 @@ var RecordsRouter = Backbone.Router.extend({
     
     list: function(appHash, projectId) {
         if(!projectId && this.HeadlightAppData.ProjectList){
-            console.log('No project ID specified when required.');
             this.navigate('/', { trigger: true, replace: true });
         }
         else {
@@ -45,7 +44,6 @@ var RecordsRouter = Backbone.Router.extend({
     
     new: function(appHash, projectId) {
         if(!projectId && this.HeadlightAppData.ProjectList){
-            console.log('No project ID specified when required.');
             this.navigate('/', { trigger: true, replace: true });
         }
         else {
@@ -69,7 +67,6 @@ var RecordsRouter = Backbone.Router.extend({
     
     edit: function(appHash, projectId, id) {
         if(!projectId && this.HeadlightAppData.ProjectList){
-            console.log('No project ID specified when required.');
             this.navigate('/', { trigger: true, replace: true });
         }
         else {
