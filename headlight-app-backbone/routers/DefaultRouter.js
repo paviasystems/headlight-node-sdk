@@ -23,7 +23,9 @@ var DefaultRouter = Backbone.Router.extend({
     },
     
     default: function(){
-        if(!this.HeadlightAppData.ProjectList)
+        if(this.HeadlightAppData.Offline)
+            this.navigate('headlightapp/' + this.HeadlightAppData.AppHash + '/records/new', { trigger: true, replace: true });
+        else if(!this.HeadlightAppData.ProjectList)
             this.navigate('headlightapp/' + this.HeadlightAppData.AppHash + '/records', { trigger: true, replace: true });
         else if (this.HeadlightAppData.AppHash)
             this.navigate('headlightapp/' + this.HeadlightAppData.AppHash + '/projects', { trigger: true, replace: true });
