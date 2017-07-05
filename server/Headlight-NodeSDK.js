@@ -54,6 +54,8 @@ var HeadlightApp = function()
 				StaticContentFolder: __dirname+'/../../../stage/',
 				HeadlightAppFolder: __dirname+'/../../../headlight-app/',
 
+				StaticLoginPage: 'login.html',
+
 				// The server application to use (by default our built-in nodesdk server)
 				ServerScript: __dirname+'/Headlight-NodeSDK-Server.js',
 
@@ -78,7 +80,8 @@ var HeadlightApp = function()
 
 		var getAppPage = function(pRequest, pResponse, fNext)
 		{
-			var tmpFile = 'login.html';
+//			var tmpFile = 'login.html';
+			var tmpFile = _Orator.settings.StaticLoginPage;
 
 			if (pRequest.UserSession.LoggedIn || _Settings.RequireAppPageLogin === false)
 				tmpFile = 'index.html';
