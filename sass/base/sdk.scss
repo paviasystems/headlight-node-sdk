@@ -9060,6 +9060,13 @@ button.toast-close-button {
 .login-terms {
   color: #fff;
 }
+.login-terms a,
+.login-terms a:active,
+.login-terms a:hover,
+.login-terms a:visited,
+.login-terms a:focus {
+    color: #FBBD08;
+}
 .login-bg {
   background: url("/images/headlight-wallpaper-1920-1080.jpg") no-repeat center center;
   background-size: cover;
