@@ -12,32 +12,81 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div id="LoginFormMain">
-                    <form id="loginForm" role="form" method="POST">
-                        <div class="modal-body clearfix">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input class="form-control" name="loginUserName" id="loginUserName" placeholder="Email Address" tabindex="1"/>
-                                    <label for="loginUserName" class="input-group-addon"><i class="fa fa-user"></i></label>
+                    <!-- login box -->
+                    <div class="login-content">
+                        <form id="loginForm" role="form" method="POST">
+                            <!-- login content area -->
+                            <div class="modal-body clearfix">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input class="form-control" name="loginUserName" id="loginUserName" placeholder="Email Address" tabindex="1"/>
+                                        <label for="loginUserName" class="input-group-addon"><i class="fa fa-user"></i></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" tabindex="2"/>
+                                        <label for="loginPassword" class="input-group-addon"><i class="fa fa-lock"></i></label>
+                                    </div>
+                                    <!-- validatation/server error response -->
+                                    <div id="loginValidateError" class="inline-alert hidden clearfix">
+                                        <i class="fa fa-exclamation-triangle icon-large"></i>
+                                        <span class="message"></span>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <button type="submit" class="btn btn-primary btn-lg pull-right" tabindex="4">Login</button>
+                                    <span class="checkbox">
+                                        <label for="rememberUser"><input type="checkbox" name="rememberUser" id="rememberUser" tabindex="3"> Remember Me</label>
+                                    </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" tabindex="2"/>
-                                    <label for="loginPassword" class="input-group-addon"><i class="fa fa-lock"></i></label>
+                            <!-- forgot password flow -->
+                            <div class="modal-footer">
+                                <div class="clearfix">
+                                    <a id="forgotPasswordToggle"  tabindex="5" class="btn btn-link btn-sm btn-block"> Forgot password?</a>
                                 </div>
                             </div>
-                            <div class="form-group clearfix hidden">
-                                <span class="pull-right"> <a id="LoginFormPasswordReset" href="" tabindex="5">forgot password?</a></span>
+                        </form>
+                     </div>
+                    <!-- forgot password box -->
+                    <div class="forgot-password-content hidden">
+                        <form id="forgotPasswordForm" role="form" method="POST">
+                            <!-- forgot password content area -->
+                            <div class="modal-body clearfix">
+                                <p class="title">Forgot password?</p>
+                                <p>Enter either your Headlight username or email address and we'll email you a link to reset your password.</p>
+                                <label for="inputEmail">Username <small>(usually your email address)</small></label>
+                                <div class="input-group">
+                                    <input type="text" id="inputEmail" class="form-control" placeholder="username@company.com">
+                                    <span class="input-group-btn">
+                                        <button id="forgotPasswordSend" class="btn btn-primary" type="submit">Send</button>
+                                    </span>
+                                </div>
+                                <!-- validatation/server error response -->
+                                <div id="resetValidateError" class="inline-alert hidden clearfix">
+                                    <i class="fa fa-exclamation-triangle icon-large"></i>
+                                    <span class="message"></span>
+                                </div>
                             </div>
-                            <div id="loginValidateError" class="alert alert-danger hidden clearfix"><i class="fa fa-exclamation-triangle icon-large"></i> Invalid user name or password.</div>
+                            <!-- forgot password flow -->
+                            <div class="modal-footer">
+                                <a class="btn btn-link btn-block btn-sm backToLogin"><i class="fa fa-fw fa-chevron-left"></i> Nevermind, I remembered!</a>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- forgot password confirmaion box -->
+                    <div class="forgot-password-confirm-content hidden">
+                            <!-- forgot password confirmation content area -->
+                       <div class="modal-body clearfix">
+                            <p class="title">Reset password email sent</p>
+                            <p>If there is a corresponding user account, then a password reset link has been sent to the associated email address. Please check your email.</p>
                         </div>
+                            <!-- forgot password flow -->
                         <div class="modal-footer">
-                            <span class="pull-left checkbox">
-                                <label for="rememberUser"><input type="checkbox" name="rememberUser" tabindex="3"> Remember Me</label>
-                            </span>
-                            <button type="submit" class="btn btn-primary btn-lg" tabindex="4">Login</button>
+                            <a class="btn btn-link btn-block btn-sm backToLogin"><i class="fa fa-fw fa-chevron-left"></i> Back to login</a>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <div class="login-terms text-center"><small>By clicking Login you are agreeing to our <a href="/Assets/templates/terms-of-service.html">Terms and Conditions</a>.</small></div>

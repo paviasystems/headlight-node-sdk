@@ -1,0 +1,28 @@
+
+#loginModal .modal-content .title {
+    font-size: 20px;
+    font-weight: bold;
+}
+#loginModal .modal-content .checkbox {
+    width: 50%;
+}
+#loginModal .modal-footer {
+    background-color: #efefef;
+    border-radius: 0 0 5px 5px;
+    padding: 2px 0;
+}
+ #loginModal .login-terms {
+    margin-top: 5px;
+}
+
+ #loginModal .login-terms a {
+    color: #FBBD08;
+}
+
+#loginModal .inline-alert {
+    color: #DB2828;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 5px 0 0 0;
+    display: inline-block;
+}
