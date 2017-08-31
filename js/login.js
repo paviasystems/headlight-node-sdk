@@ -13,14 +13,23 @@ $('#loginModal').modal('show');
 $('#forgotPasswordToggle').on('click', function() {
     $('.login-content').addClass('hidden');
     $('.forgot-password-confirm-content').addClass('hidden');
+    $('.change-password-content').addClass('hidden');
     $('.forgot-password-content').removeClass('hidden');
 });
-
+// go back to the login modal
 $('.backToLogin').on('click', function() {
     $('.forgot-password-content').addClass('hidden');
     $('.forgot-password-confirm-content').addClass('hidden');
+    $('.change-password-content').addClass('hidden');
     $('.login-content').removeClass('hidden');
 });
+// check the route to see if this a 'change/reset password' action
+if (window.location.search.indexOf('?ForgotHash=') !== -1) {
+    $('.forgot-password-content').addClass('hidden');
+    $('.forgot-password-confirm-content').addClass('hidden');
+    $('.login-content').addClass('hidden');
+    $('.change-password-content').removeClass('hidden');
+}
 
 // Get the user name if we chose to remember me
 if (window.localStorage && window.localStorage.getItem('_pict_user') !== null) {
@@ -139,6 +148,63 @@ $('#forgotPasswordForm').submit(function (pEvent) {
         $('#loginValidateError span.message').innerText = 'Unable to reach the login server. Please try again later.';
         console.error('Forgot password email failed. Reason:', reason);
     });
+
+    return false;
+});
+
+// submit an email for 'forgot password'
+$('#changePasswordForm').submit(function (pEvent) {
+    pEvent.preventDefault();
+    // get both passwords
+    var passOne = $('#password-one').val();
+    var passTwo = $('#password-two').val();
+    // make sure they match and are at least 5 characters long
+    if (passOne !== passTwo) {
+        $('#password-one').val('');
+        $('#password-two').val('');
+        $('#changeValidateError').removeClass('hidden');
+        $('#changeValidateError span.message').text('Passwords do not match! Please try again.');
+    } else if (passOne.length < 5) {
+        $('#password-one').focus();
+        $('#changeValidateError').removeClass('hidden');
+        $('#changeValidateError span.message').text('Password is too short! Please try again.');
+    } else {
+        $.ajax({
+            type: 'GET',
+            url: '1.0/User/Authenticate/Password/',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: {
+                'ForgotHash': window.location.search.replace('?ForgotHash=', ''),
+                'NewPassword': passOne
+            }
+        })
+        .done(function (result) {
+            if (result.Success) {
+                $('#changeValidateError').addClass('hidden');
+                $('#changeValidateSuccess').removeClass('hidden');
+                console.log('Password successfully changed!');
+                // give the user a few seconds to see the successful message, then go to the login modal
+                setTimeout(function() {
+                    $('.login-content').removeClass('hidden');
+                    $('.forgot-password-content').addClass('hidden');
+                    $('.forgot-password-confirm-content').addClass('hidden');
+                    $('.change-password-content').addClass('hidden');
+                }, 4000);
+            } else {
+                $('#changeValidateError').removeClass('hidden');
+                $('#changeValidateError span.message').text('Server Error. Please try again later.');
+                console.error('Unable to change password.', result);
+            }
+            passOne = undefined;
+            passTwo = undefined;
+        })
+        .fail(function (reason) {
+            $('#changeValidateError').removeClass('hidden');
+            $('#changeValidateError span.message').text('Server Error. Please try again later.');
+            console.error('Password change failed. Reason:', reason);
+        });
+    }
 
     return false;
 });
