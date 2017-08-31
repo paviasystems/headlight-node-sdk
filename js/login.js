@@ -170,14 +170,10 @@ $('#changePasswordForm').submit(function (pEvent) {
         $('#changeValidateError span.message').text('Password is too short! Please try again.');
     } else {
         $.ajax({
-            type: 'GET',
-            url: '1.0/User/Authenticate/Password/',
+            type: 'POST',
+            url: '1.0/Authenticate/Password' + window.location.search + '&NewPassword=' + passOne,
             dataType: 'json',
-            contentType: 'application/json',
-            data: {
-                'ForgotHash': window.location.search.replace('?ForgotHash=', ''),
-                'NewPassword': passOne
-            }
+            contentType: 'application/json'
         })
         .done(function (result) {
             if (result.Success) {
