@@ -169,11 +169,16 @@ $('#changePasswordForm').submit(function (pEvent) {
         $('#changeValidateError').removeClass('hidden');
         $('#changeValidateError span.message').text('Password is too short! Please try again.');
     } else {
+        var changeData = {
+            ForgotHash: window.location.search.replace('?ForgotHash=', ''),
+            NewPassword: passOne
+        };
         $.ajax({
             type: 'POST',
-            url: '1.0/Authenticate/Password' + window.location.search + '&NewPassword=' + passOne,
+            url: '1.0/Password',
             dataType: 'json',
-            contentType: 'application/json'
+            contentType: 'application/json',
+            data: JSON.stringify(changeData)
         })
         .done(function (result) {
             if (result.Success) {
