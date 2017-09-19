@@ -63,9 +63,9 @@ $('#loginForm').submit(function (pEvent) {
         {
             // Logged in successfully
             if ($('input[name="rememberUser"]').prop('checked')) {
-                // If you logged in successfully and the remember user checkbox is checked, save the cookie
+                // If you logged in successfully and the remember user check box is checked, save the cookie
                 var tmpUserName = $('input#loginUserName').val();
-                // Store username in local storage
+                // Store user name in local storage
                 if (window.localStorage) {
                     window.localStorage.setItem('_pict_user', tmpUserName);
                 } else {
@@ -92,10 +92,10 @@ $('#loginForm').submit(function (pEvent) {
                 window.location.reload();
             }
         } else {
-            // Set the UI state to "Bad Password", assuming the user has entered the proper username.
+            // Set the UI state to "Bad Password", assuming the user has entered the proper user name.
             $('#loginPassword').parent('div').addClass('has-error');
             $('#loginValidateError').removeClass('hidden');
-            $('#loginValidateError span.message').text('Invalid username or password.');
+            $('#loginValidateError span.message').text('Invalid user name or password.');
             $('#loginPassword').val('');
             $('#loginPassword').focus();
         }
@@ -136,7 +136,7 @@ $('#forgotPasswordForm').submit(function (pEvent) {
                 console.error('Forgot password email failed. Reason:', result.Error);
                 errorMessage = result.Error;
             }
-            // Set the UI state to "Bad Password", assuming the user has entered the proper username.
+            // Set the UI state to "Bad Password", assuming the user has entered the proper user name.
             $('#inputEmail').parent('div').addClass('has-error');
             $('#resetValidateError').removeClass('hidden');
             $('#resetValidateError span.message').text(errorMessage);

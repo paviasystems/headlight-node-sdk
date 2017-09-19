@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Pavia Systems - Login</title>
-    <link rel="stylesheet" type="text/css" href="login/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="styles/login.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900,300" rel="stylesheet" type="text/css">
 </head>
 <body role="document" class="login">
@@ -28,7 +28,7 @@
                                         <input type="password" class="form-control" name="loginPassword" id="loginPassword" placeholder="Password" tabindex="2"/>
                                         <label for="loginPassword" class="input-group-addon"><i class="fa fa-lock"></i></label>
                                     </div>
-                                    <!-- validatation/server error response -->
+                                    <!-- validation/server error response -->
                                     <div id="loginValidateError" class="inline-alert hidden clearfix">
                                         <i class="fa fa-exclamation-triangle icon-large"></i>
                                         <span class="message"></span>
@@ -55,7 +55,7 @@
                             <!-- forgot password content area -->
                             <div class="modal-body clearfix">
                                 <p class="title">Forgot your password?</p>
-                                <p>Enter either your Headlight username or email address and we'll email you a link to reset your password.</p>
+                                <p>Enter either your Headlight user name or email address and we'll email you a link to reset your password.</p>
                                 <label for="inputEmail">Username <small>(usually your email address)</small></label>
                                 <div class="input-group">
                                     <input type="text" id="inputEmail" class="form-control" placeholder="username@company.com">
@@ -63,7 +63,7 @@
                                         <button id="forgotPasswordSend" class="btn btn-primary" type="submit">Send</button>
                                     </span>
                                 </div>
-                                <!-- validatation/server error response -->
+                                <!-- validation/server error response -->
                                 <div id="resetValidateError" class="inline-alert hidden clearfix">
                                     <i class="fa fa-exclamation-triangle icon-large"></i>
                                     <span class="message"></span>
@@ -71,11 +71,11 @@
                             </div>
                             <!-- forgot password flow -->
                             <div class="modal-footer">
-                                <a class="btn btn-link btn-block btn-sm backToLogin"><i class="fa fa-fw fa-chevron-left"></i> Nevermind, I remembered!</a>
+                                <a class="btn btn-link btn-block btn-sm backToLogin"><i class="fa fa-fw fa-chevron-left"></i> Never mind, I remembered!</a>
                             </div>
                         </form>
                     </div>
-                    <!-- forgot password confirmaion box -->
+                    <!-- forgot password confirmation box -->
                     <div class="forgot-password-confirm-content hidden">
                             <!-- forgot password confirmation content area -->
                        <div class="modal-body clearfix">
@@ -101,12 +101,12 @@
                                     <label for="password-two">Confirm Password</label>
                                     <input type="password" name="password-two" id="password-two" class="form-control" required tabindex="2" min="5" />
                                 </div>
-                                <!-- validatation/server error response -->
+                                <!-- validation/server error response -->
                                 <div id="changeValidateSuccess" class="inline-success hidden clearfix">
                                     <i class="fa fa-check-circle icon-large"></i>
                                     <span class="message">Password successfully changed!</span>
                                 </div>
-                                <!-- validatation/server error response -->
+                                <!-- validation/server error response -->
                                 <div id="changeValidateError" class="inline-alert hidden clearfix">
                                     <i class="fa fa-exclamation-triangle icon-large"></i>
                                     <span class="message"></span>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="col-xs-6">
-                                    <button class="btn btn-default btn-block backToLogin" type="cancel" tabindex="4">Back to login</button>
+                                    <a class="btn btn-default btn-block backToLogin" tabindex="4">Back to login</a>
                                 </div>
                                 <div class="col-xs-6">
                                     <button class="btn btn-primary btn-block" tabindex="3" type="submit">Change password</button>
@@ -137,9 +137,9 @@
         // Added to support older ie
         if (typeof(console) === 'undefined') window.console = { log: function() {} };
     </script>
-    <script type="text/javascript" src="js/pict.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="app/js/pict.js"></script>
+    <script type="text/javascript" src="app/js/bootstrap.js"></script>
+    <script type="text/javascript" src="app/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="app/js/login.js"></script>
 </body>
 </html>
