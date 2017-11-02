@@ -9,7 +9,7 @@ if (typeof(pict.features) === 'undefined')
 if (typeof(pict.features.HeadlightApp) === 'undefined')
     pict.features.HeadlightApp = {};
 
-pict.features.HeadlightApp.checkSessionStatus = (fCallBack) =>
+pict.features.HeadlightApp.checkSessionStatus = function (fCallBack)
 {
 	$.ajax
 	(
@@ -22,9 +22,9 @@ pict.features.HeadlightApp.checkSessionStatus = (fCallBack) =>
 	)
 	.done
 	(
-		(pData) =>
+		function (pData)
 		{
-			if ((typeof(pData) === 'object') && 
+			if ((typeof(pData) === 'object') &&
 				(typeof(pData.UserID) !== 'undefined') && (pData.UserID !== 'undefined') &&
 				(typeof(pData.LoggedIn) !== 'undefined') && (pData.LoggedIn))
 			{
@@ -41,7 +41,7 @@ pict.features.HeadlightApp.checkSessionStatus = (fCallBack) =>
                 $('#appFooterContainer').html(pict.libs.underscore.template($('#PageHeadlight_App_Footer').text()));
 
 				// Put the User name in the header
-				$(".fullUserName").text(pData.NameFirst + " " + pData.NameLast);	
+				$('.fullUserName').text(pData.NameFirst + ' ' + pData.NameLast);
 
                 fCallBack(pData);
 			}
@@ -55,14 +55,14 @@ pict.features.HeadlightApp.checkSessionStatus = (fCallBack) =>
 	)
 	.fail
 	(
-	    () => 
+	    function ()
 	    {
 	        fCallBack(false);
 	    }
     );
 };
 
-pict.features.HeadlightApp.loadAppManifest = () =>
+pict.features.HeadlightApp.loadAppManifest = function ()
 {
 	// AJAX Load the solo app manifest
 	$.ajax
@@ -76,7 +76,7 @@ pict.features.HeadlightApp.loadAppManifest = () =>
 	)
 	.done
 	(
-		(pData) =>
+		function (pData)
 		{
 			if (typeof(pData) === 'object')
 			{
@@ -98,7 +98,7 @@ pict.features.HeadlightApp.loadAppManifest = () =>
 					pict.features[tmpModuleName].initialize(pict.session);
 					pict.features[tmpModuleName].start(pData);
 				}
-				
+
 				if(pData.AppName)
 				{
 				    document.title = 'Pavia Systems - ' + pData.AppName;
@@ -108,6 +108,6 @@ pict.features.HeadlightApp.loadAppManifest = () =>
 	)
 	.fail
 	(
-		() => {} // We might want this to do something.
+		function () {} // We might want this to do something.
 	);
 };
