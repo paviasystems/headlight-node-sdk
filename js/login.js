@@ -155,6 +155,7 @@ $('#forgotPasswordForm').submit(function (pEvent) {
 // submit an email for 'forgot password'
 $('#changePasswordForm').submit(function (pEvent) {
     pEvent.preventDefault();
+
     // get both passwords
     var passOne = $('#password-one').val();
     var passTwo = $('#password-two').val();
@@ -169,42 +170,62 @@ $('#changePasswordForm').submit(function (pEvent) {
         $('#changeValidateError').removeClass('hidden');
         $('#changeValidateError span.message').text('Password is too short! Please try again.');
     } else {
+        $('#changePasswordForm').find('button[type=submit]').attr('disabled', true);
+        var params = {};
+        var queryString = window.location.search;
+        var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+        for (var i = 0; i < pairs.length; i++) {
+            var pair = pairs[i].split('=');
+            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+        }
         var changeData = {
-            ForgotHash: window.location.search.replace('?ForgotHash=', ''),
+            ForgotHash: params.ForgotHash,
             NewPassword: passOne
         };
         $.ajax({
-            type: 'POST',
-            url: '1.0/Password',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(changeData)
-        })
-        .done(function (result) {
-            if (result.Success) {
-                $('#changeValidateError').addClass('hidden');
-                $('#changeValidateSuccess').removeClass('hidden');
-                console.log('Password successfully changed!');
-                // give the user a few seconds to see the successful message, then go to the login modal
-                setTimeout(function() {
-                    $('.login-content').removeClass('hidden');
-                    $('.forgot-password-content').addClass('hidden');
-                    $('.forgot-password-confirm-content').addClass('hidden');
-                    $('.change-password-content').addClass('hidden');
-                }, 4000);
-            } else {
+                type: 'POST',
+                url: '1.0/Password',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(changeData)
+            })
+            .done(function (result) {
+                if (result.Success) {
+                    console.log('Password successfully changed!');
+                    $('#changeValidateError').addClass('hidden');
+                    if (params.sourcepath) {
+                        $('#forwardPath').attr('href', params.sourcepath).text(params.sourcepath);
+                        $('#changeValidateSuccessWithForward').removeClass('hidden');
+
+                        // give the user a few seconds to see the successful message, then go to the login modal
+                        setTimeout(function () {
+                            window.location = decodeURIComponent(params.sourcepath);
+                        }, 4000);
+                    } else {
+                        $('#changeValidateSuccess').removeClass('hidden');
+                        // give the user a few seconds to see the successful message, then go to the login modal
+                        setTimeout(function () {
+                            $('.login-content').removeClass('hidden');
+                            $('.forgot-password-content').addClass('hidden');
+                            $('.forgot-password-confirm-content').addClass('hidden');
+                            $('.change-password-content').addClass('hidden');
+                        }, 4000);
+                    }
+                } else {
+                    $('#changePasswordForm').find('button[type=submit]').removeAttr('disabled');
+                    $('#changeValidateError').removeClass('hidden');
+                    $('#changeValidateError span.message').text('Server Error. Please try again later.');
+                    console.error('Unable to change password.', result);
+                }
+                passOne = undefined;
+                passTwo = undefined;
+            })
+            .fail(function (reason) {
+                $('#changePasswordForm').find('button[type=submit]').removeAttr('disabled');
                 $('#changeValidateError').removeClass('hidden');
                 $('#changeValidateError span.message').text('Server Error. Please try again later.');
-                console.error('Unable to change password.', result);
-            }
-            passOne = undefined;
-            passTwo = undefined;
-        })
-        .fail(function (reason) {
-            $('#changeValidateError').removeClass('hidden');
-            $('#changeValidateError span.message').text('Server Error. Please try again later.');
-            console.error('Password change failed. Reason:', reason);
-        });
+                console.error('Password change failed. Reason:', reason);
+            });
     }
 
     return false;

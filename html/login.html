@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Pavia Systems - Login</title>
-    <link rel="stylesheet" type="text/css" href="styles/login.css" />
+    <title>HeadLight - Login</title>
+    <link rel="stylesheet" type="text/css" href="login/css/theme.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900,300" rel="stylesheet" type="text/css">
 </head>
 <body role="document" class="login">
@@ -55,10 +55,10 @@
                             <!-- forgot password content area -->
                             <div class="modal-body clearfix">
                                 <p class="title">Forgot your password?</p>
-                                <p>Enter either your Headlight user name or email address and we'll email you a link to reset your password.</p>
-                                <label for="inputEmail">Username <small>(usually your email address)</small></label>
+                                <p>Enter either your HeadLight username and we'll email you a link to reset your password.</p>
+                                <label for="inputEmail">Username</label>
                                 <div class="input-group">
-                                    <input type="text" id="inputEmail" class="form-control" placeholder="username@company.com">
+                                    <input type="text" id="inputEmail" class="form-control">
                                     <span class="input-group-btn">
                                         <button id="forgotPasswordSend" class="btn btn-primary" type="submit">Send</button>
                                     </span>
@@ -101,11 +101,19 @@
                                     <label for="password-two">Confirm Password</label>
                                     <input type="password" name="password-two" id="password-two" class="form-control" required tabindex="2" min="5" />
                                 </div>
-                                <!-- validation/server error response -->
+                                <!-- validation/server success response -->
                                 <div id="changeValidateSuccess" class="inline-success hidden clearfix">
                                     <i class="fa fa-check-circle icon-large"></i>
                                     <span class="message">Password successfully changed!</span>
                                 </div>
+                                 <!-- validation/server success response when forwarding -->
+                                 <div id="changeValidateSuccessWithForward" class="inline-success hidden clearfix">
+                                     <i class="fa fa-check-circle icon-large"></i>
+                                     <span class="message">Password successfully changed!</span>
+                                     <span>You'll automatically be sent back to <a href="" id="forwardPath"></a>
+                                         shortly,
+                                         or click the link to go there immediately.</span>
+                                 </div>
                                 <!-- validation/server error response -->
                                 <div id="changeValidateError" class="inline-alert hidden clearfix">
                                     <i class="fa fa-exclamation-triangle icon-large"></i>
@@ -137,9 +145,9 @@
         // Added to support older ie
         if (typeof(console) === 'undefined') window.console = { log: function() {} };
     </script>
-    <script type="text/javascript" src="app/js/pict.js"></script>
-    <script type="text/javascript" src="app/js/bootstrap.js"></script>
-    <script type="text/javascript" src="app/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="app/js/login.js"></script>
+    <script type="text/javascript" src="js/pict.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>
