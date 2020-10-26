@@ -88,7 +88,7 @@ var HeadlightApp = function()
 
 			_Orator.fable.log.fatal('Sending '+tmpFile);
 
-			var tmpServe = libRestify.serveStatic
+			var tmpServe = libRestify.plugins.serveStatic
 			(
 				{
 					directory: _Orator.settings.StaticContentFolder,
